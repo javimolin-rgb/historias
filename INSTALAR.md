@@ -24,24 +24,22 @@ No necesitas instalar nada más a mano. Las librerías del proyecto (Playwright 
 
 No necesitas claves de pago: las escenas se dibujan en código y la voz es gratis con edge-tts.
 
-## 2. Baja el proyecto
+## 2. Baja el proyecto en la carpeta HISTORIAS del escritorio
 
-Abre una terminal en la carpeta donde quieras guardarlo, por ejemplo Documentos, y ejecuta:
+Abre Claude Code (app de escritorio, pestaña Code) en la carpeta **HISTORIAS** de tu escritorio. Créala vacía si no existe. Pega este mensaje:
 
 ```
-git clone https://github.com/javimolin-rgb/historias.git
-cd historias
-git checkout claude/vibrant-ritchie-u0vvtx
+Descarga el repositorio https://github.com/javimolin-rgb/historias (rama main) dentro de esta misma carpeta, sin crear una subcarpeta nueva. Si la carpeta está vacía, usa "git clone <url> ." directamente aquí. Si ya tiene archivos, no borres nada: inicializa git aquí, agrega el remoto origin, haz fetch y checkout de main, y avísame si algún archivo choca. Si GitHub pide iniciar sesión, guíame. Al terminar, confirma que existen CLAUDE.md, INSTALAR.md y personajes/personaje.js, y muéstrame git status. No hagas nada más.
 ```
 
-Si el repo es privado y Git te pide iniciar sesión, entra con tu cuenta de GitHub en la ventana que aparece.
+Para hacerlo a mano en la terminal:
 
-## 3. Abre Claude Code en esa carpeta
+- Windows (PowerShell): `cd "$env:USERPROFILE\Desktop"; git clone https://github.com/javimolin-rgb/historias.git HISTORIAS`. Si tu escritorio está en OneDrive, cambia `Desktop` por `OneDrive\Desktop`.
+- Mac: `cd ~/Desktop && git clone https://github.com/javimolin-rgb/historias.git HISTORIAS`
 
-- **App de escritorio:** pestaña Code → elige la carpeta `historias`.
-- **Terminal:** dentro de la carpeta `historias`, escribe `claude`.
+## 3. Empieza una conversación nueva en esa carpeta
 
-Claude Code lee solo el archivo `CLAUDE.md` con todas las reglas del proyecto: el personaje, el estilo, la fórmula de las historias y el pipeline.
+Una vez descargado, abre una conversación nueva de Claude Code en HISTORIAS. Así lee el archivo `CLAUDE.md` desde el inicio, con todas las reglas del proyecto: el personaje, el estilo, la fórmula de las historias y el pipeline.
 
 ## 4. Pega este prompt como primer mensaje
 
@@ -64,7 +62,7 @@ Hazlo en este orden y detente donde indico para que yo apruebe:
 
 7. Render final: genera el video horizontal y el vertical, con música y efectos libres de derechos (dime cuáles descargar y dónde ponerlos si no los tengo). Entrégame las rutas de los mp4.
 
-8. Guarda en git el código, el guion y las escenas (no los videos) y súbelo a la rama actual.
+8. Guarda en git el código, el guion y las escenas (no los videos) y súbelo a main.
 
 Trabaja autónomo entre los puntos de ALTO. Si una decisión es solo técnica, tómala tú. Si cambia cómo se ve o cómo suena el video, pregúntame.
 ```
