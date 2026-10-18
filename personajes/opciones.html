@@ -1,0 +1,281 @@
+<title>Casting de Supervivientes</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600&family=Gochi+Hand&display=swap">
+<style>
+/* Layout: hoja de casting. Arriba, lo aprendido de las referencias; abajo, una grilla de 15 viñetas tipo storyboard. */
+:root{
+  --bg:#eeede8; --fg:#1b1b1d; --muted:#67655f; --line:#d6d3ca; --card:#fafaf7; --accent:#d9472b; --liked:#2f6fb0;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Gochi Hand","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ff7350; --liked:#6aa6e6; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ff7350; --liked:#6aa6e6; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:40px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header{display:flex;flex-direction:column;gap:12px;max-width:70ch}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.5vw,54px);line-height:1.03;margin:0;text-wrap:balance}
+header p{margin:0;color:var(--muted)}
+
+.learn{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:24px}
+.learn h2{font-family:var(--display);font-size:22px;margin:0 0 10px}
+.learn ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px}
+.learn img{width:100%;border-radius:8px;border:1.5px solid var(--line)}
+.refs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.refs figure{margin:0;display:flex;flex-direction:column;gap:4px}
+.refs figcaption{font-size:12.5px;color:var(--muted)}
+
+.legend{display:flex;flex-wrap:wrap;gap:10px 18px;font-size:13.5px;color:var(--muted);align-items:center}
+.badge{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.04em;color:#fff;white-space:nowrap}
+.b-liked{background:var(--liked)} .b-pick{background:var(--accent)}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.pick{border:2.5px solid var(--accent)} .card.liked{border:2.5px solid var(--liked)}
+.panel{border:3px solid #1b1b1d;border-radius:6px;aspect-ratio:4/3;max-width:100%;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.panel svg{height:96%;width:auto;display:block}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.thumb{border:2px solid #1b1b1d;border-radius:4px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.thumb svg{width:70%;height:auto;display:block}
+.thumb small{font-family:var(--hand);font-size:13px;color:#1b1b1d;background:rgba(255,255,255,.75);width:100%;text-align:center}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.num{font-family:var(--display);font-weight:800;color:var(--muted);font-size:13px}
+h3{font-family:var(--display);font-weight:800;font-size:22px;margin:0;line-height:1.1}
+.alias{color:var(--muted);font-size:14px}
+.tag{font-family:var(--hand);font-size:19px;line-height:1.2;margin:0}
+dl{display:flex;flex-direction:column;gap:6px;margin:0}
+dl div{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px}
+dt{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:2px}
+dd{margin:0;font-size:14px}
+
+.verdict{border-top:1.5px solid var(--line);padding-top:28px;display:flex;flex-direction:column;gap:10px;max-width:72ch}
+.verdict h2{font-family:var(--display);font-size:26px;margin:0}
+.verdict ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.learn{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:620px){.grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Casting v2 · estilo de tus referencias</span>
+    <h1>15 supervivientes para tu canal</h1>
+    <p>Todos usan la fórmula de los dos videos: <strong>cuerpo de palitos, cabeza blanca redonda y un solo accesorio de color</strong> que lo hace reconocible. El fondo carga el detalle y el personaje casi no se anima. Cada viñeta grande alterna sola sus 3 expresiones.</p>
+  </header>
+
+  <section class="learn">
+    <div>
+      <h2>Lo que hacen tus referencias</h2>
+      <ul>
+        <li><strong>Formato de serie:</strong> «30 días atrapado en…», con un contador de días y un panel de recursos (agua, comida, batería) que va bajando.</li>
+        <li><strong>Narración en segunda persona y frases cortas:</strong> «Tú no te mueves.» Un subtítulo grande por plano.</li>
+        <li><strong>Personaje mínimo, fondo rico:</strong> el del gorro mostaza casi no se mueve. Lo que cambia es la escena y la luz.</li>
+        <li><strong>Tarjetas de datos reales</strong> («Regla 7-10», «el congelador sin luz»): el espectador siente que aprende algo y comparte.</li>
+        <li><strong>Tensión con pocos recursos:</strong> mirilla de la puerta, cámaras de seguridad, una voz conocida que no es quien parece y un giro al final.</li>
+      </ul>
+    </div>
+    <div class="refs">
+      <figure><img alt="Frames del video del edificio" src="ref-edificio.jpg"><figcaption>Instagram: 30 días en el piso 30 (2:46)</figcaption></figure>
+      <figure><img alt="Frames del video del metro" src="ref-metro.jpg"><figcaption>YouTube: el último vagón (11:53)</figcaption></figure>
+    </div>
+  </section>
+
+  <div class="legend"><span><span class="badge b-liked">Te gustó</span> versiones nuevas de las 2 que elegiste</span><span><span class="badge b-pick">Top</span> mis favoritos para este formato</span></div>
+
+  <section class="grid" id="grid"></section>
+
+  <section class="verdict">
+    <span class="eyebrow">Mi recomendación</span>
+    <h2>Top 3 para este formato</h2>
+    <ol>
+      <li><strong>Faro (linterna frontal).</strong> Es el único cuyo accesorio <em>ilumina la escena</em>. En lugares oscuros, como el metro, el haz de luz es su firma: lo reconoces aunque solo veas la luz.</li>
+      <li><strong>Remi (curita).</strong> Cada serie termina con una curita nueva que se queda para siempre. La cara va contando su historial y la gente cuenta las curitas en los comentarios.</li>
+      <li><strong>Mochi (mochila gigante).</strong> La mochila es el inventario de cada historia. Encaja directo con las tarjetas de recursos y con la pregunta «¿qué llevarías tú?».</li>
+    </ol>
+    <p>También puedes combinar opciones: por ejemplo, Faro con la curita de Remi.</p>
+  </section>
+</div>
+
+<script>
+const K = "#1b1b1d";
+const L = `stroke="${K}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+const O = `stroke="${K}" stroke-width="4" stroke-linejoin="round"`;
+const HX = 100, HY = 72, R = 34;
+
+function limbs(e){
+  const arms = e==="shock" ? "M100 118 L80 100 L72 78 M100 118 L120 100 L128 78"
+             : e==="nerv"  ? "M100 118 L86 136 L98 144 M100 118 L114 136 L102 144"
+             :               "M100 118 L86 140 L82 162 M100 118 L114 140 L118 162";
+  return `<path d="M100 104 L100 170" ${L}/><path d="${arms}" ${L}/>
+          <path d="M100 170 L90 222 L82 224 M100 170 L110 222 L118 224" ${L}/>`;
+}
+function head(){ return `<circle cx="${HX}" cy="${HY}" r="${R}" fill="#fff" ${O}/>`; }
+function eyes(e, o={}){
+  const y = o.y ?? 74, a = 100-(o.gap??12), b = 100+(o.gap??12);
+  const ry = e==="shock" ? 10 : e==="nerv" ? 5.5 : 7.5, rx = e==="shock" ? 6.5 : 4.5;
+  const one = x => o.skip===x ? "" : `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${K}"/>`;
+  let s = one(a) + one(b);
+  if (e==="nerv") s += `<path d="M${a-7} ${y-12} L${a+5} ${y-16} M${b+7} ${y-12} L${b-5} ${y-16}" stroke="${K}" stroke-width="3.5" stroke-linecap="round"/>
+     <path d="M${b+22} ${y-14} q5 8 0 11 q-5 -3 0 -11z" fill="#7cc7ee" stroke="${K}" stroke-width="2.5"/>`;
+  if (e==="shock" && !o.noMouth) s += `<ellipse cx="100" cy="${y+20}" rx="4.5" ry="6" fill="${K}"/>`;
+  if (e==="nerv" && !o.noMouth) s += `<path d="M92 ${y+20} q2 -3 4 0 q2 3 4 0 q2 -3 4 0 q2 3 4 0" stroke="${K}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  return s;
+}
+const basic = (e, top="", back="", o={}) => back + limbs(e) + head() + eyes(e,o) + top;
+
+const chars = [
+ {n:"01", name:"Pancho", alias:"el de la bolsa", liked:true, bg:"#e9dcc6",
+  tag:"Nadie le ha visto la cara. Ni él quiere.",
+  trait:"Bolsa de papel en la cabeza, con agujeros por ojos.",
+  serie:"«30 días encerrado en un supermercado»",
+  anim:"Solo cambia el tamaño de los agujeros.",
+  draw:e=>{ const h=e==="shock"?[7,11]:e==="nerv"?[4,5]:[5,7.5];
+    return limbs(e)+`<path d="M66 108 L66 44 L74 36 L82 44 L90 36 L98 44 L106 36 L114 44 L122 36 L130 44 L134 40 L134 108 Z" fill="#d6a96c" ${O}/>
+    <path d="M74 98 L77 106 M126 96 L123 104" stroke="${K}" stroke-width="2.5" stroke-linecap="round"/>
+    <ellipse cx="88" cy="72" rx="${h[0]}" ry="${h[1]}" fill="${K}"/><ellipse cx="112" cy="72" rx="${h[0]}" ry="${h[1]}" fill="${K}"/>
+    ${e==="nerv"?`<path d="M80 60 L94 56 M120 60 L106 56" stroke="${K}" stroke-width="3.5" stroke-linecap="round"/>`:""}`; }},
+ {n:"02", name:"Remi", alias:"el de la curita", liked:true, pick:true, bg:"#f3dccb",
+  tag:"Cada historia le deja una curita nueva.",
+  trait:"Curita cruzada y un mechón parado. Las curitas se van acumulando entre series.",
+  serie:"«Sobreviví 30 días en el último vagón»",
+  anim:"Con el susto se le para el mechón.",
+  draw:e=>basic(e, `<path d="${e==="shock"?"M94 40 L90 14 L100 30 L108 10 L106 40":"M94 40 L92 24 L100 32 L106 20 L106 40"}" stroke="${K}" stroke-width="4" stroke-linejoin="round" fill="${K}"/>
+    <g transform="rotate(-30 116 92)"><rect x="100" y="86" width="32" height="11" rx="5.5" fill="#efbf8b" stroke="${K}" stroke-width="3"/><rect x="111" y="86" width="10" height="11" fill="#dda26a" stroke="${K}" stroke-width="2.5"/></g>`)},
+ {n:"03", name:"Rojo", alias:"el de la capucha", bg:"#d7dbe2",
+  tag:"Siempre con la capucha puesta. Nunca sabes qué está planeando.",
+  trait:"Polerón rojo con la capucha arriba. Se reconoce de lejos y en miniatura.",
+  serie:"«30 días escondido en un centro comercial»",
+  anim:"Con el susto se le cae la capucha.",
+  draw:e=>{ const hood = e==="shock" ? `<path d="M68 96 Q60 120 78 124 L122 124 Q140 120 132 96" fill="#c7372f" ${O}/>` :
+      `<path d="M100 30 C136 30 146 62 140 92 C136 112 122 120 100 120 C78 120 64 112 60 92 C54 62 64 30 100 30 Z" fill="#c7372f" ${O}/>`;
+    const face = e==="shock" ? head() : `<ellipse cx="100" cy="78" rx="27" ry="30" fill="#fff" ${O}/>`;
+    return limbs(e)+`<rect x="84" y="108" width="32" height="50" rx="12" fill="#c7372f" ${O}/>`+hood+face+eyes(e,{y:78,gap:11}); }},
+ {n:"04", name:"Faro", alias:"el de la linterna", pick:true, bg:"#1e2738", dark:true,
+  tag:"Donde él va, hay luz. Y lo que hay en la oscuridad lo ve primero.",
+  trait:"Linterna frontal con su haz. En lugares oscuros, el haz es su firma.",
+  serie:"«30 días en la mina abandonada»",
+  anim:"La luz parpadea con el miedo y se apaga en el clímax.",
+  draw:e=>{ const beam = e==="nerv" ? 0.12 : 0.38;
+    return `<path d="M100 48 L210 -10 L210 110 Z" fill="#ffe680" opacity="${beam}"/>`+basic(e,
+    `<path d="M67 60 Q100 46 133 60" stroke="#3b4a5e" stroke-width="7" fill="none"/>
+     <rect x="91" y="44" width="18" height="13" rx="3" fill="#7a8796" stroke="${K}" stroke-width="3"/>
+     <circle cx="100" cy="50.5" r="4" fill="${e==="nerv"?"#9aa5b1":"#fff6b0"}"/>`); }},
+ {n:"05", name:"Fil", alias:"el del respirador", bg:"#cfd9cf",
+  tag:"No le ves la boca. Solo los ojos te dicen si hay que correr.",
+  trait:"Respirador con dos filtros verdes. Encaja con historias de aire tóxico, nubes o virus.",
+  serie:"«30 días en la ciudad bajo la nube tóxica»",
+  anim:"Expresión solo con los ojos. Los filtros hacen ruido al respirar (audio).",
+  draw:e=>basic(e, `<path d="M74 80 Q100 76 126 80 Q124 104 100 106 Q76 104 74 80 Z" fill="#59605a" ${O}/>
+    <circle cx="78" cy="94" r="9" fill="#4f9a62" ${O}/><circle cx="122" cy="94" r="9" fill="#4f9a62" ${O}/>
+    <path d="M94 96 L106 96 M94 100 L106 100" stroke="#9aa39b" stroke-width="2"/>`, "", {y:66, noMouth:true})},
+ {n:"06", name:"Lucho", alias:"el de las antiparras", bg:"#d9e6ee",
+  tag:"Listo para el frío extremo… en teoría.",
+  trait:"Antiparras de nieve naranjas sobre la frente.",
+  serie:"«30 días atrapado en una estación de esquí»",
+  anim:"Con el susto se baja las antiparras sobre los ojos.",
+  draw:e=>{ const y = e==="shock" ? 74 : 50;
+    const g = `<path d="M66 ${y} Q100 ${y-12} 134 ${y}" stroke="#2c3440" stroke-width="7" fill="none"/>
+      <rect x="76" y="${y-11}" width="48" height="20" rx="10" fill="#f08a2c" stroke="${K}" stroke-width="3.5"/>
+      <path d="M84 ${y-5} L92 ${y-5}" stroke="#ffd9b0" stroke-width="3" stroke-linecap="round"/>`;
+    return limbs(e)+head()+(e==="shock"?"":eyes(e))+g+(e==="shock"?`<ellipse cx="100" cy="94" rx="4.5" ry="6" fill="${K}"/>`:""); }},
+ {n:"07", name:"Tano", alias:"el de la vincha", bg:"#efe0d0",
+  tag:"Se cree protagonista de película de acción. No lo es.",
+  trait:"Vincha roja con dos tiras largas que flotan.",
+  serie:"«30 días en una isla después del naufragio»",
+  anim:"Las tiras se mueven con el viento o el susto. Animarlas cuesta casi nada.",
+  draw:e=>{ const t = e==="shock" ? "M134 54 Q150 30 168 26 M134 58 Q154 44 172 46" : e==="nerv" ? "M134 56 Q140 80 136 100 M134 60 Q146 84 146 104" : "M134 54 Q154 50 170 60 M134 58 Q150 64 162 78";
+    return basic(e, `<path d="M66 56 Q100 44 134 56" stroke="#d13a2e" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <path d="${t}" stroke="#d13a2e" stroke-width="6" fill="none" stroke-linecap="round"/>`); }},
+ {n:"08", name:"Orejas", alias:"el del gorro ruso", bg:"#dfe3ea",
+  tag:"Vino preparado para el invierno. No para lo que vino después.",
+  trait:"Gorro de piel con orejeras. Silueta cuadrada, muy distinta al gorro de lana.",
+  serie:"«30 días en la base de la Antártica»",
+  anim:"Las orejeras suben o bajan según el ánimo.",
+  draw:e=>{ const f = e==="shock" ? "M66 60 L52 40 L60 34 L72 52 M134 60 L148 40 L140 34 L128 52" : e==="nerv" ? "M68 64 L64 98 L76 100 L80 70 M132 64 L136 98 L124 100 L120 70" : "M68 62 L62 90 L74 92 L78 66 M132 62 L138 90 L126 92 L122 66";
+    return basic(e, `<path d="${f}" fill="#8a5a3b" ${O}/><path d="M64 60 Q62 30 100 28 Q138 30 136 60 Z" fill="#8a5a3b" ${O}/>
+      <rect x="62" y="52" width="76" height="14" rx="7" fill="#c9a27d" ${O}/>`); }},
+ {n:"09", name:"Mochi", alias:"el de la mochila", pick:true, bg:"#e2e6d4",
+  tag:"Lleva todo. Siempre le falta lo único que necesita.",
+  trait:"Mochila gigante, más grande que él. Cada historia abre con lo que lleva adentro.",
+  serie:"«30 días perdido en la selva con 1 mochila»",
+  anim:"La mochila no se mueve. Al asustarse, algo se le cae de ella.",
+  draw:e=>basic(e, `<path d="M92 104 L118 116 M108 104 L82 116" stroke="#4d5a2f" stroke-width="4"/>`,
+    `<rect x="104" y="40" width="62" height="130" rx="16" fill="#7c8a45" ${O}/><rect x="114" y="110" width="42" height="34" rx="8" fill="#6a7739" ${O}/>
+     <rect x="100" y="28" width="70" height="18" rx="9" fill="#b0563a" ${O}/>${e==="shock"?`<rect x="160" y="196" width="14" height="22" rx="3" fill="#7cc7ee" ${O}/>`:""}`)},
+ {n:"10", name:"Tuerto", alias:"el del parche", bg:"#e4dcea",
+  tag:"Perdió un ojo la primera vez. Aprendió a mirar mejor con el otro.",
+  trait:"Parche negro en el ojo. Lo reconoces con una sola mirada.",
+  serie:"«30 días encerrado en el hospital vacío»",
+  anim:"Un solo ojo, así que cada cambio de expresión se nota más.",
+  draw:e=>basic(e, `<path d="M66 58 L134 80" stroke="${K}" stroke-width="3"/><ellipse cx="112" cy="74" rx="12" ry="10" fill="${K}"/>`, "", {skip:112})},
+ {n:"11", name:"Eco", alias:"el de los audífonos", bg:"#f0e3cc",
+  tag:"Escucha todo. Ese es justamente el problema.",
+  trait:"Audífonos naranjas gigantes. En historias donde el ruido mata, los usa para oír el peligro.",
+  serie:"«30 días en silencio total»",
+  anim:"Se pone los audífonos cuando escucha algo (sonido = tensión).",
+  draw:e=>{ const on = e!=="norm";
+    const hp = on ? `<path d="M66 70 Q66 30 100 30 Q134 30 134 70" stroke="#e8792b" stroke-width="7" fill="none"/><rect x="58" y="62" width="16" height="26" rx="7" fill="#e8792b" ${O}/><rect x="126" y="62" width="16" height="26" rx="7" fill="#e8792b" ${O}/>`
+      : `<path d="M78 112 Q100 128 122 112" stroke="#e8792b" stroke-width="7" fill="none"/><rect x="66" y="100" width="16" height="22" rx="7" fill="#e8792b" ${O}/><rect x="118" y="100" width="16" height="22" rx="7" fill="#e8792b" ${O}/>`;
+    return basic(e, hp); }},
+ {n:"12", name:"Cuatro", alias:"el de los lentes", bg:"#dce8e6",
+  tag:"Calcula todo. Las cuentas nunca le cuadran a su favor.",
+  trait:"Lentes redondos enormes. Él presenta las tarjetas de datos y en sus vidrios se refleja la amenaza.",
+  serie:"«30 días con 2 litros de agua»",
+  anim:"El reflejo en los lentes cuenta la historia: una sombra, un fuego, un ojo.",
+  draw:e=>{ const refl = e==="shock" ? `<circle cx="88" cy="74" r="3" fill="#d13a2e"/><circle cx="112" cy="74" r="3" fill="#d13a2e"/>` : "";
+    return basic(e, `<circle cx="87" cy="74" r="14" fill="#cfe8f5" fill-opacity=".45" ${O}/><circle cx="113" cy="74" r="14" fill="#cfe8f5" fill-opacity=".45" ${O}/>
+      <path d="M101 74 L99 74" stroke="${K}" stroke-width="4"/><path d="M80 66 L86 62" stroke="#fff" stroke-width="3" stroke-linecap="round"/>${refl}`, "", {gap:13}); }},
+ {n:"13", name:"Siete", alias:"el sujeto 07", bg:"#e6e6e1",
+  tag:"Despertó con un número en la frente. No recuerda por qué.",
+  trait:"«07» estampado en rojo en la frente. Trae un misterio que se resuelve de a poco, serie tras serie.",
+  serie:"«30 días dentro del laboratorio subterráneo»",
+  anim:"El número no cambia. La tensión viene de lo que la gente teoriza sobre él.",
+  draw:e=>basic(e, `<text x="100" y="58" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="20" fill="#c73a2f" transform="rotate(-6 100 52)">07</text>`, "", {y:78})},
+ {n:"14", name:"Gotas", alias:"el del paraguas", bg:"#d6dde6",
+  tag:"Nunca suelta su paraguas rojo. Le ha servido de escudo, de remo y de arma.",
+  trait:"Paraguas rojo. Silueta única: cerrado en la mano, abierto sobre la cabeza.",
+  serie:"«30 días en la ciudad inundada»",
+  anim:"Abre el paraguas con el susto. Es un solo cambio de pieza.",
+  draw:e=>{ const u = e==="shock" ? `<path d="M128 78 L128 150" ${L}/><path d="M78 72 Q128 10 178 72 Q166 64 153 72 Q140 64 128 72 Q116 64 103 72 Q90 64 78 72 Z" fill="#d23a2f" ${O}/>`
+      : `<path d="M126 160 L136 222" stroke="${K}" stroke-width="4"/><path d="M126 152 L120 158 L140 220 L136 150 Z" fill="#d23a2f" ${O}/><path d="M126 152 q-6 -10 2 -12" ${L}/>`;
+    return basic(e, u); }},
+ {n:"15", name:"Rey", alias:"el de la corona", bg:"#efe6c8",
+  tag:"Se coronó rey del fin del mundo. Su reino: un estacionamiento.",
+  trait:"Corona de cartón dorada. Tiene ironía y humor, y es fácil de dibujar.",
+  serie:"«30 días reinando en un mall abandonado»",
+  anim:"Con el susto la corona salta. Cuando le va mal, queda chueca.",
+  draw:e=>{ const t = e==="shock" ? "translate(0 -16)" : e==="nerv" ? "rotate(-14 100 44)" : "";
+    return basic(e, `<g transform="${t}"><path d="M72 50 L72 24 L84 36 L94 18 L100 34 L106 18 L116 36 L128 24 L128 50 Z" fill="#e9b93a" ${O}/>
+      <circle cx="100" cy="42" r="3.5" fill="#d13a2e"/></g>`); }},
+];
+
+const EX = [["norm","normal"],["shock","¡¿qué?!"],["nerv","nervioso"]];
+const svg = (c,e) => `<svg viewBox="0 0 200 232" role="img" aria-label="${c.name}, ${e}">${c.draw(e)}</svg>`;
+const ground = c => `<div style="position:absolute;left:0;right:0;bottom:0;height:12%;background:${c.dark?"#141b28":"rgba(0,0,0,.08)"}"></div>`;
+
+document.getElementById("grid").innerHTML = chars.map(c => `
+ <article class="card${c.pick?" pick":c.liked?" liked":""}">
+  <div class="panel" style="background:${c.bg}">${ground(c)}${svg(c,"norm")}</div>
+  <div class="thumbs">${EX.map(([e,l])=>`<div class="thumb" style="background:${c.bg}">${svg(c,e)}<small>${l}</small></div>`).join("")}</div>
+  <div class="head"><span class="num">${c.n}</span><h3>${c.name}</h3><span class="alias">${c.alias}</span>
+    ${c.liked?'<span class="badge b-liked">Te gustó</span>':""}${c.pick?'<span class="badge b-pick">Top</span>':""}</div>
+  <p class="tag">${c.tag}</p>
+  <dl>
+   <div><dt>Rasgo</dt><dd>${c.trait}</dd></div>
+   <div><dt>Serie</dt><dd>${c.serie}</dd></div>
+   <div><dt>Animar</dt><dd>${c.anim}</dd></div>
+  </dl>
+ </article>`).join("");
+
+const seq = ["norm","norm","shock","norm","nerv","nerv"];
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  let t = 0;
+  setInterval(() => { t++;
+    document.querySelectorAll(".panel").forEach((p,i) => { p.querySelector("svg").outerHTML = svg(chars[i], seq[(t+i)%seq.length]); });
+  }, 900);
+}
+</script>
