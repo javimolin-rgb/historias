@@ -1,0 +1,56 @@
+{
+  "titulo": "Demo del pipeline",
+  "voz": "es-MX-JorgeNeural",
+  "planos": [
+    {
+      "id": "p01",
+      "escena": "living-noche",
+      "personaje": {
+        "pose": "sosteniendo",
+        "expr": "normal",
+        "mirar": "izquierda",
+        "x": 660,
+        "y": 905
+      },
+      "narracion": "Son las 23:40 y tu teléfono vibra. No es una llamada.",
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "45 L",
+        "comida": "25 días",
+        "bateria": "80%"
+      },
+      "camara": "zoom-in-lento",
+      "sfx": [
+        "vibracion"
+      ],
+      "tarjeta": null
+    },
+    {
+      "id": "p02",
+      "escena": "living-noche",
+      "escenaOpts": {
+        "lampara": false
+      },
+      "personaje": {
+        "pose": "brazos_arriba",
+        "expr": "sorpresa",
+        "mirar": "derecha",
+        "x": 660,
+        "y": 905
+      },
+      "narracion": "Se corta la luz. Tú no te mueves.",
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "45 L",
+        "comida": "25 días",
+        "bateria": "78%"
+      },
+      "camara": "temblor",
+      "efecto": "titila",
+      "transicion": "fundido",
+      "subtitulo": "grito"
+    }
+  ]
+}

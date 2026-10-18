@@ -1,0 +1,1211 @@
+{
+  "titulo": "30 días atrapado en una estación de servicio",
+  "serie": "30 días atrapado en…",
+  "voz": "es-BO-MarceloNeural",
+  "rate": "-4%",
+  "musica": "ceniza",
+  "volumenMusica": 0.085,
+  "notas": "Historia original. Los datos de las tarjetas son reales y llevan su fuente.",
+  "planos": [
+    {
+      "escena": "estacion-exterior",
+      "narracion": "A las tres de la tarde, el cielo se puso gris.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "ceniza": 0.03,
+        "luces": false,
+        "hora": "tarde",
+        "cayendo": false
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "normal",
+        "mirar": "derecha",
+        "x": 760,
+        "y": 985
+      },
+      "respiro": 0.2,
+      "id": "p01",
+      "rotulo": {
+        "arriba": "30 DÍAS ATRAPADO EN",
+        "texto": "UNA ESTACIÓN DE SERVICIO"
+      }
+    },
+    {
+      "escena": "estacion-exterior",
+      "narracion": "No era una nube.",
+      "camara": "zoom-in",
+      "escenaOpts": {
+        "ceniza": 0.05,
+        "luces": false,
+        "hora": "tarde"
+      },
+      "personaje": {
+        "pose": "brazos_arriba",
+        "expr": "sorpresa",
+        "mirar": "derecha",
+        "x": 760,
+        "y": 985
+      },
+      "sfx": [
+        "viento"
+      ],
+      "respiro": 0.15,
+      "id": "p02",
+      "rotulo": {
+        "arriba": "30 DÍAS ATRAPADO EN",
+        "texto": "UNA ESTACIÓN DE SERVICIO"
+      },
+      "volumenSfx": 0.3
+    },
+    {
+      "escena": "estacion-exterior",
+      "narracion": "Era ceniza. Y no paraba de caer.",
+      "camara": "temblor",
+      "escenaOpts": {
+        "ceniza": 0.18,
+        "luces": true,
+        "hora": "tarde"
+      },
+      "personaje": {
+        "pose": "cubriendose",
+        "expr": "nervioso",
+        "mirar": "derecha",
+        "x": 760,
+        "y": 985
+      },
+      "respiro": 0.2,
+      "id": "p03"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Trabajas solo en la estación del kilómetro 212.",
+      "camara": "paneo-derecha",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0,
+        "ceniza": 0.05
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "normal",
+        "mirar": "izquierda"
+      },
+      "transicion": "fundido",
+      "id": "p04"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Y acabas de quedar encerrado treinta días.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0,
+        "ceniza": 0.1
+      },
+      "personaje": {
+        "pose": "manos_juntas",
+        "expr": "nervioso",
+        "mirar": "izquierda"
+      },
+      "sfx": [
+        "impacto"
+      ],
+      "subtitulo": "grito",
+      "id": "p05",
+      "volumenSfx": 0.5
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "La ruta desapareció en media hora.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "ceniza": 0.12,
+        "luz": true
+      },
+      "personaje": {
+        "pose": "tocando",
+        "expr": "sorpresa",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "transicion": "fundido",
+      "id": "p06"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "La persiana bajó sola. No vuelve a subir.",
+      "camara": "temblor",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0,
+        "ceniza": 0.15
+      },
+      "personaje": {
+        "pose": "empujando",
+        "expr": "nervioso",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "sfx": [
+        "persiana"
+      ],
+      "id": "p07",
+      "volumenSfx": 0.4
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Tienes la tienda entera para ti.",
+      "camara": "paneo-izquierda",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0,
+        "ceniza": 0.15
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "duda",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "id": "p08"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Cuarenta y ocho litros de agua. Comida para veinticinco días.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0.05,
+        "ceniza": 0.18
+      },
+      "personaje": {
+        "pose": "agachado",
+        "expr": "normal",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "id": "p09"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Y un radio a pilas que repite lo mismo.",
+      "camara": "zoom-in",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0.05,
+        "ceniza": 0.2
+      },
+      "personaje": {
+        "pose": "sosteniendo",
+        "expr": "normal",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "sfx": [
+        "estatica"
+      ],
+      "props": [
+        {
+          "nombre": "radio",
+          "rx": 0.33,
+          "ry": 0.86,
+          "escala": 1.1,
+          "v": {
+            "rx": 0.2,
+            "ry": 0.9
+          }
+        }
+      ],
+      "id": "p10",
+      "volumenSfx": 0.32
+    },
+    {
+      "escena": "tienda",
+      "narracion": "«Permanezcan en el interior. Vamos en camino.»",
+      "camara": "fijo",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0.05,
+        "ceniza": 0.22
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "normal",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "id": "p11"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Día uno. Les crees.",
+      "camara": "zoom-out-lento",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0.1,
+        "ceniza": 0.25
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 1,
+        "total": 30,
+        "agua": "48 L",
+        "comida": "25 días",
+        "bateria": "100%"
+      },
+      "transicion": "fundido",
+      "id": "p12"
+    },
+    {
+      "escena": "bodega",
+      "narracion": "Día tres. El agua del bidón sale gris.",
+      "camara": "zoom-in",
+      "escenaOpts": {
+        "luz": true,
+        "agua": 0.8
+      },
+      "personaje": {
+        "pose": "agachado",
+        "expr": "sorpresa",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 3,
+        "total": 30,
+        "agua": "44 L",
+        "comida": "24 días",
+        "bateria": "92%"
+      },
+      "transicion": "fundido",
+      "id": "p13"
+    },
+    {
+      "escena": "bodega",
+      "narracion": "La ceniza no es polvo. Es roca y vidrio molidos.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "luz": true,
+        "agua": 0.8
+      },
+      "tarjeta": {
+        "titulo": "DATO REAL",
+        "texto": "La ceniza volcánica no se disuelve en agua, es extremadamente abrasiva y conduce electricidad cuando está mojada.",
+        "fuente": "USGS — «Ash Fall: A Hard Rain of Abrasive Particles» (FS 027-00)"
+      },
+      "id": "p14",
+      "respiro": 0.9
+    },
+    {
+      "escena": "bodega",
+      "narracion": "La cuelas con una camiseta. Igual rechina.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "luz": true,
+        "agua": 0.75
+      },
+      "personaje": {
+        "pose": "sosteniendo",
+        "expr": "nervioso",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 3,
+        "total": 30,
+        "agua": "44 L",
+        "comida": "24 días",
+        "bateria": "92%"
+      },
+      "id": "p15"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Día seis. Se corta la luz.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "luz": true,
+        "vacio": 0.2,
+        "ceniza": 0.35
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "sorpresa",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 6,
+        "total": 30,
+        "agua": "38 L",
+        "comida": "21 días",
+        "bateria": "70%"
+      },
+      "sfx": [
+        "clic"
+      ],
+      "transicion": "fundido",
+      "efecto": "titila",
+      "respiro": 0.15,
+      "id": "p16",
+      "volumenSfx": 0.4
+    },
+    {
+      "escena": "tienda",
+      "narracion": "El refrigerador se apaga. Comes lo que se va a perder.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.3,
+        "ceniza": 0.38,
+        "emergencia": true
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 6,
+        "total": 30,
+        "agua": "38 L",
+        "comida": "21 días",
+        "bateria": "70%"
+      },
+      "props": [
+        {
+          "nombre": "vela",
+          "rx": 0.36,
+          "ry": 0.9,
+          "escala": 1.2,
+          "v": {
+            "rx": 0.22,
+            "ry": 0.93
+          }
+        }
+      ],
+      "id": "p17"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Día nueve. El techo se queja.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.35,
+        "ceniza": 0.45,
+        "emergencia": true,
+        "pandeo": 0.25
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "nervioso",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 9,
+        "total": 30,
+        "agua": "32 L",
+        "comida": "18 días",
+        "bateria": "55%"
+      },
+      "sfx": [
+        "crujido"
+      ],
+      "transicion": "fundido",
+      "id": "p18",
+      "volumenSfx": 0.45
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Diez centímetros de ceniza mojada pesan más que la nieve.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.35,
+        "ceniza": 0.45,
+        "emergencia": true,
+        "pandeo": 0.3
+      },
+      "tarjeta": {
+        "titulo": "DATO REAL",
+        "texto": "Diez centímetros de ceniza húmeda cargan entre 100 y 200 kilos por metro cuadrado. Muchos techos ceden con eso.",
+        "fuente": "USGS Volcano Hazards Program / IVHHN"
+      },
+      "id": "p19",
+      "respiro": 0.9
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Barres el techo cuatro veces al día.",
+      "camara": "paneo-derecha",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.4,
+        "ceniza": 0.48,
+        "emergencia": true,
+        "pandeo": 0.2
+      },
+      "personaje": {
+        "pose": "sosteniendo",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 9,
+        "total": 30,
+        "agua": "32 L",
+        "comida": "18 días",
+        "bateria": "55%"
+      },
+      "props": [
+        {
+          "nombre": "escoba",
+          "rx": 0.3,
+          "ry": 0.95,
+          "escala": 0.9,
+          "v": {
+            "rx": 0.18
+          }
+        }
+      ],
+      "id": "p20"
+    },
+    {
+      "escena": "estacion-exterior",
+      "narracion": "Día doce. Ya no ves los surtidores.",
+      "camara": "zoom-out-lento",
+      "escenaOpts": {
+        "ceniza": 0.7,
+        "luces": false,
+        "hora": "noche"
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "triste",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 12,
+        "total": 30,
+        "agua": "26 L",
+        "comida": "14 días",
+        "bateria": "40%"
+      },
+      "transicion": "fundido",
+      "id": "p21"
+    },
+    {
+      "escena": "estacion-exterior",
+      "narracion": "Nadie viene porque no hay por dónde llegar.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "ceniza": 0.75,
+        "luces": false,
+        "hora": "noche"
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "triste",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 12,
+        "total": 30,
+        "agua": "26 L",
+        "comida": "14 días",
+        "bateria": "40%"
+      },
+      "id": "p22"
+    },
+    {
+      "escena": "afuera-ceniza",
+      "narracion": "Esto ya pasó antes, y más grande.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "ceniza": 0.8,
+        "hora": "tarde",
+        "cayendo": true
+      },
+      "tarjeta": {
+        "titulo": "DATO REAL",
+        "texto": "En 1980, el monte Santa Helena soltó más de 500 millones de toneladas de ceniza en un solo día, sobre tres estados.",
+        "fuente": "USGS — «Ash Fall: A Hard Rain of Abrasive Particles» (FS 027-00)"
+      },
+      "id": "p23",
+      "respiro": 1.5
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Día quince. El radio dice lo mismo que el día uno.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.55,
+        "ceniza": 0.6,
+        "emergencia": true,
+        "pandeo": 0.15
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 15,
+        "total": 30,
+        "agua": "21 L",
+        "comida": "11 días",
+        "bateria": "28%"
+      },
+      "sfx": [
+        "estatica"
+      ],
+      "transicion": "fundido",
+      "props": [
+        {
+          "nombre": "radio",
+          "rx": 0.33,
+          "ry": 0.88,
+          "escala": 1.0,
+          "v": {
+            "rx": 0.2,
+            "ry": 0.92
+          }
+        }
+      ],
+      "id": "p24",
+      "volumenSfx": 0.32
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Palabra por palabra.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.55,
+        "ceniza": 0.6,
+        "emergencia": true
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "duda",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 15,
+        "total": 30,
+        "agua": "21 L",
+        "comida": "11 días",
+        "bateria": "28%"
+      },
+      "respiro": 0.1,
+      "id": "p25"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Es una grabación.",
+      "camara": "temblor",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.55,
+        "ceniza": 0.62,
+        "emergencia": true
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "sorpresa",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 15,
+        "total": 30,
+        "agua": "21 L",
+        "comida": "11 días",
+        "bateria": "28%"
+      },
+      "sfx": [
+        "impacto"
+      ],
+      "subtitulo": "grito",
+      "id": "p26",
+      "volumenSfx": 0.5
+    },
+    {
+      "escena": "bodega",
+      "narracion": "Empiezas a medir cada vaso.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "luz": false,
+        "agua": 0.35
+      },
+      "personaje": {
+        "pose": "agachado",
+        "expr": "nervioso",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 15,
+        "total": 30,
+        "agua": "21 L",
+        "comida": "11 días",
+        "bateria": "28%"
+      },
+      "props": [
+        {
+          "nombre": "linterna",
+          "rx": 0.3,
+          "ry": 0.72,
+          "escala": 1.0,
+          "piso": false,
+          "v": {
+            "rx": 0.14,
+            "ry": 0.76
+          }
+        }
+      ],
+      "id": "p27"
+    },
+    {
+      "escena": "bodega",
+      "narracion": "Quince litros al día. Eso necesita una persona.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "luz": false,
+        "agua": 0.35
+      },
+      "tarjeta": {
+        "titulo": "DATO REAL",
+        "texto": "En una emergencia se calculan 15 litros por persona al día para todo. Solo para beber, entre 2,5 y 3 litros.",
+        "fuente": "Manual Esfera 2018 — Abastecimiento de agua"
+      },
+      "id": "p28",
+      "respiro": 0.9
+    },
+    {
+      "escena": "bodega",
+      "narracion": "Tú estás tomando dos.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "luz": false,
+        "agua": 0.3
+      },
+      "personaje": {
+        "pose": "encogido",
+        "expr": "triste",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 15,
+        "total": 30,
+        "agua": "21 L",
+        "comida": "11 días",
+        "bateria": "28%"
+      },
+      "id": "p29"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Día diecinueve. El agua alcanza para ocho días.",
+      "camara": "zoom-out-lento",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.75,
+        "ceniza": 0.72,
+        "emergencia": true,
+        "pandeo": 0.25,
+        "fuga": true
+      },
+      "personaje": {
+        "pose": "sentado",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "transicion": "fundido",
+      "id": "p30"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Esa noche, alguien golpea el vidrio.",
+      "camara": "temblor-fuerte",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.75,
+        "ceniza": 0.75,
+        "emergencia": true,
+        "pandeo": 0.25
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "sorpresa",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "sfx": [
+        "golpes"
+      ],
+      "respiro": 0.15,
+      "id": "p31",
+      "volumenSfx": 0.55
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Hay una persona afuera.",
+      "camara": "zoom-in",
+      "escenaOpts": {
+        "ceniza": 0.55,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "sorpresa",
+        "mirar": "derecha"
+      },
+      "subtitulo": "grito",
+      "id": "p32",
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      }
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Dice tu nombre.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "ceniza": 0.55,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "tocando",
+        "expr": "nervioso",
+        "mirar": "derecha"
+      },
+      "sfx": [
+        "golpes"
+      ],
+      "respiro": 0.15,
+      "id": "p33",
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "volumenSfx": 0.55
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Y conoces esa voz.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "ceniza": 0.58,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "empujando",
+        "expr": "duda",
+        "mirar": "derecha"
+      },
+      "id": "p34",
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      }
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Es Rubén. El turno de la mañana.",
+      "camara": "temblor",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.78,
+        "ceniza": 0.78,
+        "emergencia": true,
+        "pandeo": 0.25
+      },
+      "personaje": {
+        "pose": "cubriendose",
+        "expr": "sorpresa",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "sfx": [
+        "impacto"
+      ],
+      "transicion": "fundido",
+      "id": "p35",
+      "volumenSfx": 0.5
+    },
+    {
+      "escena": "afuera-ceniza",
+      "narracion": "Pero el auto de Rubén nunca salió del playón.",
+      "camara": "paneo-derecha",
+      "escenaOpts": {
+        "ceniza": 0.9,
+        "hora": "tarde"
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "nervioso",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "id": "p36"
+    },
+    {
+      "escena": "afuera-ceniza",
+      "narracion": "Está enterrado ahí desde el primer día.",
+      "camara": "zoom-in",
+      "escenaOpts": {
+        "ceniza": 0.95,
+        "hora": "tarde"
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "sorpresa",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "respiro": 0.15,
+      "id": "p37"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Nunca se fue.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.8,
+        "ceniza": 0.8,
+        "emergencia": true,
+        "pandeo": 0.3
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "nervioso",
+        "mirar": "izquierda"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "subtitulo": "grito",
+      "respiro": 0.2,
+      "id": "p38"
+    },
+    {
+      "escena": "bodega",
+      "narracion": "Y el agua no se estaba evaporando.",
+      "camara": "temblor-fuerte",
+      "escenaOpts": {
+        "luz": false,
+        "agua": 0.12
+      },
+      "personaje": {
+        "pose": "agachado",
+        "expr": "sorpresa",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 19,
+        "total": 30,
+        "agua": "14 L",
+        "comida": "7 días",
+        "bateria": "15%"
+      },
+      "sfx": [
+        "impacto"
+      ],
+      "transicion": "fundido",
+      "id": "p39",
+      "volumenSfx": 0.5
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Día veintiséis. Vuelve a golpear.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "ceniza": 0.72,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 26,
+        "total": 30,
+        "agua": "6 L",
+        "comida": "3 días",
+        "bateria": "4%"
+      },
+      "sfx": [
+        "golpes"
+      ],
+      "transicion": "fundido",
+      "id": "p40",
+      "volumenSfx": 0.55
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Más despacio que antes.",
+      "camara": "fijo",
+      "escenaOpts": {
+        "ceniza": 0.75,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "quieto",
+        "expr": "triste",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 26,
+        "total": 30,
+        "agua": "6 L",
+        "comida": "3 días",
+        "bateria": "4%"
+      },
+      "respiro": 0.2,
+      "id": "p41"
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Del otro lado del vidrio hay una mano.",
+      "camara": "zoom-in-cara",
+      "escenaOpts": {
+        "ceniza": 0.78,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "tocando",
+        "expr": "duda",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 26,
+        "total": 30,
+        "agua": "6 L",
+        "comida": "3 días",
+        "bateria": "4%"
+      },
+      "id": "p42"
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Pones la tuya encima.",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "ceniza": 0.8,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "tocando",
+        "expr": "cerrados",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 26,
+        "total": 30,
+        "agua": "6 L",
+        "comida": "3 días",
+        "bateria": "4%"
+      },
+      "respiro": 0.5,
+      "id": "p43"
+    },
+    {
+      "escena": "tienda",
+      "narracion": "Día treinta. Ya no queda agua.",
+      "camara": "zoom-out-lento",
+      "escenaOpts": {
+        "luz": false,
+        "vacio": 0.95,
+        "ceniza": 0.9,
+        "emergencia": true,
+        "pandeo": 0.35,
+        "fuga": true
+      },
+      "personaje": {
+        "pose": "encogido",
+        "expr": "cansado",
+        "mirar": "derecha"
+      },
+      "hud": {
+        "dia": 30,
+        "total": 30,
+        "agua": "2 L",
+        "comida": "1 día",
+        "bateria": "0%"
+      },
+      "transicion": "fundido",
+      "id": "p44"
+    },
+    {
+      "escena": "puerta-tienda",
+      "narracion": "Abres.",
+      "camara": "zoom-in",
+      "escenaOpts": {
+        "ceniza": 0.85,
+        "silueta": true,
+        "luz": false
+      },
+      "personaje": {
+        "pose": "empujando",
+        "expr": "normal",
+        "mirar": "derecha"
+      },
+      "sfx": [
+        "persiana"
+      ],
+      "subtitulo": "grito",
+      "respiro": 0.4,
+      "id": "p45",
+      "hud": {
+        "dia": 30,
+        "total": 30,
+        "agua": "2 L",
+        "comida": "1 día",
+        "bateria": "0%"
+      },
+      "volumenSfx": 0.4
+    },
+    {
+      "escena": "afuera-ceniza",
+      "narracion": "En la ceniza quedan dos rastros de huellas.",
+      "camara": "paneo-derecha",
+      "escenaOpts": {
+        "ceniza": 0.95,
+        "huellas": true,
+        "hora": "dia"
+      },
+      "personaje": {
+        "pose": "caminando",
+        "expr": "normal",
+        "mirar": "derecha"
+      },
+      "transicion": "fundido",
+      "id": "p46"
+    },
+    {
+      "escena": "afuera-ceniza",
+      "narracion": "Los dos van hacia la ruta.",
+      "camara": "zoom-out",
+      "escenaOpts": {
+        "ceniza": 0.95,
+        "huellas": true,
+        "hora": "dia"
+      },
+      "personaje": {
+        "pose": "caminando",
+        "expr": "normal",
+        "mirar": "derecha",
+        "escala": 0.8
+      },
+      "respiro": 0.5,
+      "id": "p47"
+    },
+    {
+      "escena": "afuera-ceniza",
+      "narracion": "¿Tú habrías abierto la puerta?",
+      "camara": "zoom-in-lento",
+      "escenaOpts": {
+        "ceniza": 0.95,
+        "huellas": true,
+        "hora": "dia"
+      },
+      "transicion": "fundido",
+      "subtitulo": "grito",
+      "respiro": 1.2,
+      "id": "p48"
+    }
+  ]
+}

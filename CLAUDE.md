@@ -80,16 +80,54 @@ La duración de cada plano sale de la duración de su audio, más un respiro de 
 - `npm run video -- historias/NNN`: ffmpeg aplica cámara y transiciones, agrega voz, música y efectos, y quema los subtítulos. Salida: `salida/NNN-youtube.mp4` y `salida/NNN-vertical.mp4`.
 - `npm run todo -- historias/NNN`: corre los tres pasos en orden.
 
-Audio: la música y los efectos van en `assets/audio/` y son libres de derechos (Pixabay o la biblioteca de audio de YouTube). Antes de publicar, registra la licencia de cada pista en `assets/audio/LICENCIAS.md`.
+- `npm run audio`: genera la música y los efectos por síntesis en `assets/audio/`.
+
+Audio: la música y los efectos de `assets/audio/` se generan en el repo con `scripts/audio.js`,
+así que no hay licencias de terceros que seguir. Si alguna vez se usa una pista ajena, tiene que
+ser libre de derechos (Pixabay o la biblioteca de audio de YouTube) y su licencia se registra en
+`assets/audio/LICENCIAS.md` **antes** de publicar.
+
+## Lo que ya existe (no rehacer)
+
+**Fondos** (`escenas/fondos/*.js`). Cada uno exporta `nombre`, `anclas` (dónde se para el personaje
+en cada formato), `aire` (polvo, grano, viñeta) y `dibujar({w, h, ...opts})`. Se recomponen según
+el formato: en 9:16 la cámara está más cerca y los muebles se apilan, no se recorta el 16:9.
+
+| Fondo | Opciones |
+|---|---|
+| `living-noche` | `lampara`, `cortina` |
+| `estacion-exterior` | `ceniza` 0-1, `luces`, `hora` tarde\|noche, `cayendo` |
+| `tienda` | `luz`, `emergencia`, `vacio` 0-1, `ceniza` 0-1, `pandeo` 0-1, `fuga` |
+| `puerta-tienda` | `ceniza` 0-1, `silueta`, `luz` |
+| `bodega` | `luz`, `agua` 0-1 |
+| `afuera-ceniza` | `ceniza` 0-1, `huellas`, `hora`, `cayendo` |
+
+**Props** (`escenas/props/index.js` + `estacion.js`, que se suman en el mismo objeto).
+Generales: `ventanaCiudad`, `sofa`, `lampara`, `puerta`, `mirilla`, `estante`, `bidon`, `latas`,
+`camaraSeguridad`, `mesa`, `celular`, `vela`, `caja`, `reja`, `letrero`, `cuadro`, `alfombra`, `planta`.
+De la estación: `surtidor`, `mostrador`, `gondola`, `refrigerador`, `puertaVidrio`, `montonCeniza`,
+`autoCubierto`, `radio`, `linterna`, `techoChapa`, `cartelEstacion`, `conoVial`, `escoba`.
+Ayudas: `poner` (x, y libres), `enPiso` (apoya el prop en la línea del suelo usando `CAJA`),
+`luz`, `cono` (haz desenfocado), `sombra`, `atmosfera`, `vineta`, `grano`, `neblina`, `cenizaCayendo`.
+
+**Campos útiles del plano**, además de los del ejemplo de arriba:
+`escenaOpts` (opciones del fondo), `props` (lista de props sueltos en coordenadas relativas
+`rx`/`ry` de 0 a 1, con `v` para corregir el vertical), `rotulo` (título de serie en pantalla),
+`efecto` (`titila`, `oscurece`), `transicion` (`fundido`), `subtitulo` (`grito`),
+`respiro` (segundos extra al final), `volumenSfx`.
+
+**Cámaras:** `fijo`, `zoom-in-lento`, `zoom-in`, `zoom-in-cara`, `zoom-out-lento`, `zoom-out`,
+`paneo-izquierda`, `paneo-derecha`, `temblor`, `temblor-fuerte`.
 
 ## Estructura
 
 ```
 personajes/    personaje.js (oficial) y páginas del casting
-escenas/       fondos SVG por lugar y props/ reutilizables
+escenas/       fondos/ por lugar y props/ reutilizables
 historias/     NNN-slug/guion.json, audio/, planos/
-assets/audio/  música y efectos
-scripts/       voz, escenas y video
+assets/audio/  música y efectos (generados por npm run audio)
+scripts/       voz, escenas, video, todo, audio, voces
+bin/           ffmpeg y ffprobe descargados (no se versionan)
 salida/        videos finales (no se versionan: van en .gitignore)
 ```
 

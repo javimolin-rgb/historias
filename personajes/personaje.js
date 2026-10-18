@@ -60,7 +60,8 @@
   }
 
   /* Expresiones: solo cambian ojos, cejas, gota y líneas de susto. */
-  const OJOS = { normal: [4.2, 6.8], sorpresa: [5.5, 9], nervioso: [3.8, 5], cerrados: null };
+  const OJOS = { normal: [4.2, 6.8], sorpresa: [5.5, 9], nervioso: [3.8, 5], cerrados: null,
+                 cansado: [4, 4.2], triste: [4, 5.6], duda: [4.2, 6.2] };
   function cara(expr = "normal") {
     const id = "pc" + uid++;
     const r = OJOS[expr];
@@ -68,11 +69,18 @@
       ? `<ellipse cx="76" cy="110" rx="${r[0]}" ry="${r[1]}" fill="${K}"/><ellipse cx="102" cy="110" rx="${r[0]}" ry="${r[1]}" fill="${K}"/>
          <circle cx="77.5" cy="107" r="1.4" fill="#fff"/><circle cx="103.5" cy="107" r="1.4" fill="#fff"/>`
       : `<path d="M70 111 Q76 115 82 111 M96 111 Q102 115 108 111" stroke="${K}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
-    const extra = expr === "nervioso"
+    const parpados = expr === "cansado"
+      ? `<path d="M68 104 L84 104 M94 104 L110 104" stroke="${K}" stroke-width="4" stroke-linecap="round"/>`
+      : expr === "triste"
+      ? `<path d="M68 99 L84 103 M94 103 L110 99" stroke="${K}" stroke-width="3.5" stroke-linecap="round"/>`
+      : expr === "duda"
+      ? `<path d="M68 101 L84 97 M95 100 L110 100" stroke="${K}" stroke-width="3.5" stroke-linecap="round"/>`
+      : "";
+    const extra = parpados + (expr === "nervioso"
       ? `<path d="M69 99 L80 95 M98 96 L108 99" stroke="${K}" stroke-width="3" stroke-linecap="round"/>
          <path d="M134 94 q5 8 0 11 q-5 -3 0 -11z" fill="#8fd0f0" stroke="${K}" stroke-width="2.5"/>`
       : expr === "sorpresa"
-      ? `<path d="M60 74 L52 68 M64 64 L58 56 M140 74 L148 68" stroke="${K}" stroke-width="3" stroke-linecap="round"/>` : "";
+      ? `<path d="M60 74 L52 68 M64 64 L58 56 M140 74 L148 68" stroke="${K}" stroke-width="3" stroke-linecap="round"/>` : "");
     return `<defs><clipPath id="${id}"><circle cx="100" cy="96" r="42"/></clipPath></defs>
       <circle cx="100" cy="96" r="42" fill="#d3d8e1"/>
       <circle cx="108" cy="86" r="42" fill="#fff" clip-path="url(#${id})"/>
@@ -87,12 +95,39 @@
     manos_juntas:  { brazos: "M100 150 L84 174 L98 182 M100 150 L116 174 L104 184", manos: [[98, 182], [104, 184]] },
     caminando:     { brazos: "M100 150 L86 176 L74 198 M100 150 L112 178 L124 200", manos: [[73, 200], [125, 202]],
                      piernas: "M100 220 L84 288 L72 290 M100 220 L114 286 L126 290" },
+
+    /* --- poses agregadas para las historias de encierro ---
+       "cabeza" baja la cabeza y el gorro: sin eso un personaje sentado queda del mismo
+       alto que uno de pie. Los pies siguen tocando y=290, asi que el ancla no cambia. */
+
+    /* Sentado en el suelo, piernas estiradas hacia un lado. */
+    sentado:       { cabeza: 66, torso: "M100 202 L104 268",
+                     brazos: "M102 222 L80 250 L70 276 M102 222 L132 246 L154 262",
+                     manos: [[68, 278], [156, 262]],
+                     piernas: "M104 268 L158 276 L162 292 M104 268 L146 288 L190 290" },
+    /* Encogido contra una pared, rodillas al pecho. */
+    encogido:      { cabeza: 54, torso: "M100 192 L100 250",
+                     brazos: "M100 206 L70 230 L94 252 M100 206 L130 230 L106 254",
+                     manos: [[94, 254], [106, 256]],
+                     piernas: "M100 250 L64 262 L74 292 M100 250 L136 262 L126 292" },
+    /* Agachado mirando algo en el suelo. */
+    agachado:      { cabeza: 46, torso: "M100 184 L100 236",
+                     brazos: "M100 196 L76 224 L68 250 M100 196 L124 224 L132 250",
+                     manos: [[66, 252], [134, 252]],
+                     piernas: "M100 236 L66 262 L58 292 M100 236 L134 264 L142 292" },
+    /* Una mano apoyada adelante: en el vidrio, en la puerta, en la pared. */
+    tocando:       { brazos: "M100 150 L74 168 L46 172 M100 150 L116 182 L120 210", manos: [[42, 172], [120, 212]] },
+    /* Las dos manos adelante, empujando o sosteniendose. */
+    empujando:     { brazos: "M100 150 L72 162 L44 160 M100 150 L74 180 L48 186", manos: [[40, 158], [44, 188]] },
+    /* Tapandose la cara. */
+    cubriendose:   { brazos: "M100 150 L78 132 L84 108 M100 150 L122 132 L116 108", manos: [[82, 104], [118, 104]] },
   };
   const PIERNAS = "M100 220 L92 290 L80 292 M100 220 L110 290 L122 292";
 
   function cuerpo(pose = "quieto") {
     const p = POSES[pose];
-    return `<path d="M100 136 L100 220" ${LIMB}/><path d="${p.brazos}" ${LIMB}/>
+    if (!p) throw new Error(`Pose desconocida: "${pose}". Hay: ${Object.keys(POSES).join(", ")}`);
+    return `<path d="${p.torso || "M100 136 L100 220"}" ${LIMB}/><path d="${p.brazos}" ${LIMB}/>
       ${p.manos.map(([x, y]) => `<circle cx="${x}" cy="${y}" r="5" fill="${K}"/>`).join("")}
       <path d="${p.piernas || PIERNAS}" ${LIMB}/>`;
   }
@@ -100,7 +135,9 @@
   /* Devuelve un <g> listo para insertar en una escena. x, y = posición de los pies; escala 1 = 300 px de alto. */
   function dibujar({ pose = "quieto", expr = "normal", color = "frambuesa", mirar = "izquierda", x = 100, y = 292, escala = 1 } = {}) {
     const espejo = mirar === "derecha" ? "translate(200 0) scale(-1 1)" : "";
-    return `<g transform="translate(${x} ${y}) scale(${escala}) translate(-100 -292)"><g transform="${espejo}">${cuerpo(pose)}${cara(expr)}${gorro(color)}</g></g>`;
+    const dy = (POSES[pose] || {}).cabeza || 0;
+    const testa = dy ? `<g transform="translate(0 ${dy})">${cara(expr)}${gorro(color)}</g>` : `${cara(expr)}${gorro(color)}`;
+    return `<g transform="translate(${x} ${y}) scale(${escala}) translate(-100 -292)"><g transform="${espejo}">${cuerpo(pose)}${testa}</g></g>`;
   }
   const svg = (o = {}) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 20 200 280">${dibujar(o)}</svg>`;
   const busto = (o = {}) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="24 24 156 136">${cara(o.expr)}${gorro(o.color)}</svg>`;

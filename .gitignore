@@ -1,0 +1,27 @@
+# dependencias
+node_modules/
+
+# videos finales
+salida/
+
+# audios y planos renderizados (se regeneran con el pipeline)
+historias/**/audio/
+historias/**/planos/
+historias/**/subs/
+
+# musica y efectos descargados (solo versionamos LICENCIAS.md)
+assets/audio/*
+!assets/audio/LICENCIAS.md
+
+# pruebas de voz
+pruebas/
+
+# sistema
+.DS_Store
+*.log
+
+# temporales del montaje
+historias/**/.tmp/
+
+# binarios descargados (ffmpeg/ffprobe)
+bin/

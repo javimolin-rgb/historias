@@ -1,0 +1,18 @@
+{
+  "name": "historias",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Canal de historias animadas de supervivencia en espanol: guion, escenas SVG, voz, subtitulos y montaje.",
+  "type": "commonjs",
+  "scripts": {
+    "voz": "node scripts/voz.js",
+    "escenas": "node scripts/escenas.js",
+    "video": "node scripts/video.js",
+    "todo": "node scripts/todo.js",
+    "voces": "node scripts/voces.js",
+    "audio": "node scripts/audio.js"
+  },
+  "dependencies": {
+    "playwright": "^1.64.1"
+  }
+}

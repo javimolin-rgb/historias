@@ -1,74 +1,79 @@
-# Cómo dejar todo listo en tu computador
+# Instalar y correr el pipeline
 
-## 1. Instala estos 5 programas (una sola vez)
+Probado en este equipo: macOS 12.6 (Monterey), Intel x86_64, sin Homebrew.
 
-| Programa | Para qué sirve | Windows | Mac |
-|---|---|---|---|
-| **Git** | Bajar este proyecto y guardar cambios | https://git-scm.com/download/win | Viene con el Mac (si no, `xcode-select --install`) |
-| **Node.js LTS** | Dibujar las escenas y correr el pipeline | https://nodejs.org (botón «LTS») | https://nodejs.org (botón «LTS») |
-| **Python 3** | Generar las voces (edge-tts) | https://www.python.org/downloads/ (marca «Add Python to PATH») | https://www.python.org/downloads/ |
-| **ffmpeg** | Armar el video: unir imágenes, voz y subtítulos | En PowerShell: `winget install Gyan.FFmpeg` | `brew install ffmpeg` (con Homebrew: https://brew.sh) |
-| **Claude Code** | Trabajar conmigo en tu carpeta local | App de escritorio de Claude (pestaña Code) o en PowerShell: `irm https://claude.ai/install.ps1 \| iex` | App de escritorio de Claude (pestaña Code) o en Terminal: `curl -fsSL https://claude.ai/install.sh \| bash` |
+## Qué hace falta
 
-Después de instalar, cierra y vuelve a abrir la terminal. Para comprobar que todo quedó instalado, cada uno de estos comandos debe mostrar una versión:
+| Herramienta | Estado aquí | Para qué |
+|---|---|---|
+| git 2.37 | ya estaba | versionar |
+| Node 24 / npm 11 | ya estaba | todo el pipeline |
+| Python 3.12 | ya estaba | edge-tts |
+| edge-tts 7.3.1 | instalado con `pip3 install --user edge-tts` | voz y subtítulos |
+| Playwright + Chromium | instalado con `npm install` | rasterizar las escenas SVG a PNG |
+| ffmpeg + ffprobe 9.0.2 | descargados a `bin/` | montaje, cámara, audio, subtítulos quemados |
 
-```
-git --version
-node --version
-python --version      (en Mac: python3 --version)
-ffmpeg -version
-claude --version
-```
+## Pasos
 
-No necesitas instalar nada más a mano. Las librerías del proyecto (Playwright para dibujar y edge-tts para la voz) las instala Claude Code en el primer paso.
-
-No necesitas claves de pago: las escenas se dibujan en código y la voz es gratis con edge-tts.
-
-## 2. Baja el proyecto en la carpeta HISTORIAS del escritorio
-
-Abre Claude Code (app de escritorio, pestaña Code) en la carpeta **HISTORIAS** de tu escritorio. Créala vacía si no existe. Pega este mensaje:
-
-```
-Descarga el repositorio https://github.com/javimolin-rgb/historias (rama main) dentro de esta misma carpeta, sin crear una subcarpeta nueva. Si la carpeta está vacía, usa "git clone <url> ." directamente aquí. Si ya tiene archivos, no borres nada: inicializa git aquí, agrega el remoto origin, haz fetch y checkout de main, y avísame si algún archivo choca. Si GitHub pide iniciar sesión, guíame. Al terminar, confirma que existen CLAUDE.md, INSTALAR.md y personajes/personaje.js, y muéstrame git status. No hagas nada más.
+```bash
+npm install
+pip3 install --user edge-tts
 ```
 
-Para hacerlo a mano en la terminal:
+### Chromium
 
-- Windows (PowerShell): `cd "$env:USERPROFILE\Desktop"; git clone https://github.com/javimolin-rgb/historias.git HISTORIAS`. Si tu escritorio está en OneDrive, cambia `Desktop` por `OneDrive\Desktop`.
-- Mac: `cd ~/Desktop && git clone https://github.com/javimolin-rgb/historias.git HISTORIAS`
+`npx playwright install chromium` **falla en macOS 12**: las versiones nuevas de Playwright ya no
+publican binarios para este sistema (`Playwright does not support chromium on mac12`).
+En este equipo quedó una revisión anterior en la caché y el pipeline la usa directamente:
+`scripts/lib/bin.js` busca en `~/Library/Caches/ms-playwright/` y toma la revisión más alta que
+exista, en vez de confiar en la que pide Playwright. No hay que hacer nada más.
 
-## 3. Empieza una conversación nueva en esa carpeta
+Si algún día esa caché se borra, hay dos salidas: instalar una versión vieja de Playwright
+(`npm i -D playwright@1.49` y luego `npx playwright install chromium`), o apuntar
+`chromiumPath()` a un Chrome ya instalado.
 
-Una vez descargado, abre una conversación nueva de Claude Code en HISTORIAS. Así lee el archivo `CLAUDE.md` desde el inicio, con todas las reglas del proyecto: el personaje, el estilo, la fórmula de las historias y el pipeline.
+### ffmpeg
 
-## 4. Pega este prompt como primer mensaje
+No hay Homebrew en el equipo y el ffmpeg que trae Playwright no sirve: está compilado con
+`--disable-everything` y solo exporta VP8/webm, sin H.264, sin AAC y sin los filtros
+`zoompan`, `subtitles` ni `amix` que usa el montaje.
 
-```
-Lee CLAUDE.md y personajes/personaje.js. Vamos a producir la primera historia de prueba del canal, de punta a punta, en esta carpeta local.
+Se descargó un build estático completo de <https://ffmpeg.martin-riedl.de> (versión 9.0.2,
+con `libx264`, `libass`, `libfreetype`) y quedó en `bin/`:
 
-Hazlo en este orden y detente donde indico para que yo apruebe:
-
-1. Entorno: verifica que git, node, python y ffmpeg funcionen. Crea package.json, instala playwright (con chromium) y edge-tts, y arma .gitignore (salida/, audios y planos renderizados). Si falta algo, dime exactamente qué instalar.
-
-2. Pipeline mínimo: crea scripts/ con los comandos voz, escenas, video y todo, tal como los describe CLAUDE.md. Pruébalo con una demo de 10 segundos: 2 planos, el personaje en un living de noche, voz y subtítulos. Muéstrame el mp4. ALTO: espera mi visto bueno.
-
-3. Voz: genera la misma frase con 4 voces de edge-tts (2 de es-MX, 1 de es-CL y 1 de es-US) para que yo elija.
-
-4. Historia: proponme 3 premisas originales del tipo «30 días atrapado en…», cada una con su gancho de 1 frase. ALTO: yo elijo una.
-
-5. Guion: escribe guion.json de la versión Instagram (2 a 3 minutos) con la fórmula de CLAUDE.md. Usa datos reales con fuente. ALTO: yo apruebo el texto.
-
-6. Escenas: arma los fondos SVG y los props que necesite la historia, en el mismo estilo del personaje. Muéstrame 4 planos clave en PNG. ALTO: los apruebo.
-
-7. Render final: genera el video horizontal y el vertical, con música y efectos libres de derechos (dime cuáles descargar y dónde ponerlos si no los tengo). Entrégame las rutas de los mp4.
-
-8. Guarda en git el código, el guion y las escenas (no los videos) y súbelo a main.
-
-Trabaja autónomo entre los puntos de ALTO. Si una decisión es solo técnica, tómala tú. Si cambia cómo se ve o cómo suena el video, pregúntame.
+```bash
+curl -fsSL -o ffmpeg.zip  "https://ffmpeg.martin-riedl.de/redirect/latest/macos/amd64/release/ffmpeg.zip"
+curl -fsSL -o ffprobe.zip "https://ffmpeg.martin-riedl.de/redirect/latest/macos/amd64/release/ffprobe.zip"
+unzip -o ffmpeg.zip -d bin && unzip -o ffprobe.zip -d bin && chmod +x bin/ffmpeg bin/ffprobe
 ```
 
-## Qué esperar
+`bin/` está en `.gitignore`: son ~190 MB y no se versionan. Para verificar:
 
-- **Paso 2:** el primer video de prueba debería estar listo en unos 15 a 30 minutos.
-- **Paso 6:** las escenas son lo que más trabajo lleva. Cada historia nueva reutiliza los props de las anteriores, así que se vuelve más rápido con cada video.
-- **Si edge-tts deja de funcionar** (es un servicio gratis no oficial de Microsoft), pídele a Claude Code que cambie a Piper (voz offline, gratis) o a ElevenLabs (de pago, mejor calidad).
+```bash
+npm run video -- --check
+```
+
+(evermeet.cx, la fuente habitual de ffmpeg para Mac, respondía 429 y 410 al intentarlo.)
+
+## Comandos
+
+```bash
+npm run voz     -- historias/001-slug   # un mp3 y un .srt por plano, más audio/tiempos.json
+npm run escenas -- historias/001-slug   # PNG de cada plano en 16:9 y 9:16
+npm run video   -- historias/001-slug   # salida/001-youtube.mp4 y salida/001-vertical.mp4
+npm run todo    -- historias/001-slug   # los tres en orden
+npm run voces   -- "frase de prueba"    # compara voces de edge-tts en pruebas/voces/
+```
+
+Opciones útiles:
+
+- `--solo p01,p04` — trabaja solo esos planos (para iterar sin rehacer todo).
+- `--formato 16x9` o `--formato 9x16` — un solo formato.
+- `--rapido` — encode de previsualización (más rápido, archivo más chico).
+- `--calidad maxima` — encode más lento para la versión que se publica.
+
+## Audio
+
+La música va en `assets/audio/musica/` y los efectos en `assets/audio/sfx/`, con el nombre que
+use el guion (`"sfx": ["vibracion"]` busca `assets/audio/sfx/vibracion.mp3`). Si falta un
+archivo el montaje avisa y sigue sin él. Las licencias se anotan en `assets/audio/LICENCIAS.md`.
