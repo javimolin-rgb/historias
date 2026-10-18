@@ -1,0 +1,206 @@
+<title>Gorro a Rayas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600&family=Gochi+Hand&display=swap">
+<style>
+/* Layout: héroe con el personaje en 4 escenas típicas; luego antes/ahora del tejido, prueba de color y expresiones. */
+:root{
+  --bg:#eeede8; --fg:#1b1b1d; --muted:#67655f; --line:#d6d3ca; --card:#fafaf7; --accent:#c8336b;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Gochi Hand","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ec5f93; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ec5f93; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:40px 64px}
+.wrap{max-width:1120px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header{display:flex;flex-direction:column;gap:12px;max-width:72ch}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.5vw,54px);line-height:1.03;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(22px,3vw,28px);margin:0}
+header p,.sec>p{margin:0;color:var(--muted);max-width:72ch}
+.sec{display:flex;flex-direction:column;gap:14px}
+
+.scenes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.scene{border:3px solid #1b1b1d;border-radius:6px;aspect-ratio:3/4;max-width:100%;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.scene svg{position:relative;height:90%;width:auto;display:block}
+.scene .lbl{position:absolute;top:8px;left:10px;font-family:var(--hand);font-size:16px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.6);z-index:1}
+.s-noche{background:linear-gradient(180deg,#1c2848 0%,#2b3e70 68%,#3b3430 68%,#4a3f37 100%)}
+.s-noche::before{content:"";position:absolute;inset:0 0 32% 0;background:repeating-linear-gradient(90deg,transparent 0 31%,#141c34 31% 33%)}
+.s-lampara{background:radial-gradient(circle at 25% 30%,#f2c27a 0,#b07a45 35%,#5a3e2c 75%),#5a3e2c}
+.s-bano{background:linear-gradient(180deg,#b9c6a6 0%,#a7b693 68%,#d9d6cc 68%,#c9c5ba 100%)}
+.s-bano::before{content:"";position:absolute;inset:0 0 32% 0;background-image:linear-gradient(#93a37f 2px,transparent 2px),linear-gradient(90deg,#93a37f 2px,transparent 2px);background-size:34px 34px}
+.s-gris{background:linear-gradient(180deg,#7a8087 0%,#5f656c 68%,#3e4246 68%,#34373a 100%)}
+
+.fix{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;max-width:640px}
+.fix figure{margin:0;background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.fix .zoom{background:#e9e6df;border:2px solid #1b1b1d;border-radius:6px}
+.fix svg{width:100%;height:auto;display:block}
+.fix figcaption{font-size:13.5px}
+.fix figcaption b{display:block}
+
+.colors{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.col{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.col.pick{border:2.5px solid var(--accent)}
+.mini{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px}
+.mini .scene{aspect-ratio:1/1.25;border-width:2px;border-radius:4px}
+.mini .scene svg{height:94%}
+.col .hd{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.chip{width:16px;height:16px;border-radius:50%;border:2px solid #1b1b1d}
+.col h3{font-family:var(--display);font-size:18px;margin:0}
+.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;color:#fff;background:var(--accent)}
+.col p{margin:0;font-size:14px}
+
+.expr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;align-items:start}
+.ex{background:#e9e6df;border:2.5px solid #1b1b1d;border-radius:6px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.ex svg{width:100%;height:auto;display:block}
+.ex small{font-family:var(--hand);font-size:16px;color:#1b1b1d;background:#f6f4ef;width:100%;text-align:center;padding:2px 0}
+
+@media (max-width:900px){.scenes,.colors,.expr{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:520px){.colors{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Personaje principal · versión de trabajo</span>
+    <h1>El del gorro a rayas</h1>
+    <p>Es el mismo cuerpo de la referencia, ahora sin bufanda, con gorro a rayas en <strong>frambuesa</strong>. Corregí el tejido del canto para que siga la curva del gorro y le di volumen con luz desde arriba a la izquierda, sombra hacia la derecha y la sombra que el gorro proyecta sobre la cabeza.</p>
+  </header>
+
+  <section class="sec">
+    <h2>En escenas típicas de las historias</h2>
+    <div class="scenes" id="hero"></div>
+  </section>
+
+  <section class="sec">
+    <h2>El tejido del canto, corregido</h2>
+    <p>Antes, las líneas eran paralelas y rectas aunque el canto es curvo. Ahora cada línea va de la curva de arriba a la de abajo, y se juntan hacia los bordes porque el gorro es redondo. Las rayas también siguen la curva.</p>
+    <div class="fix" id="fix"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Prueba de color</h2>
+    <p>Las escenas del género son azules de noche, ámbar de lámpara, verdes y grises. El color del gorro tiene que destacar en todas y no parecerse al mostaza del Beanie.</p>
+    <div class="colors" id="colors"></div>
+  </section>
+
+  <section class="sec">
+    <h2>Expresiones</h2>
+    <p>Siguen siendo piezas intercambiables: ojos, cejas, una gota de sudor y la pose de los brazos.</p>
+    <div class="expr" id="expr"></div>
+  </section>
+</div>
+
+<script>
+const K = "#161618";
+const LIMB = `stroke="${K}" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+const OUT = `stroke="${K}" stroke-width="5" stroke-linejoin="round"`;
+let uid = 0;
+
+const COLORS = {
+  frambuesa:{name:"Frambuesa", base:"#c8336b", dark:"#8c1f49", pick:true,
+    note:"No aparece en ningún fondo del género, así que destaca sobre azul, ámbar, verde y gris. Es femenino y masculino a la vez, y es fácil de recordar."},
+  naranjo:{name:"Naranjo quemado", base:"#d9622b", dark:"#99401a",
+    note:"Resalta muy bien en la noche, pero se pierde con la luz de lámpara y queda cerca del mostaza del Beanie."},
+  turquesa:{name:"Turquesa", base:"#1f9e93", dark:"#11665e",
+    note:"Es fresco y distinto, pero se confunde con escenas azules y verdes."},
+  morado:{name:"Morado", base:"#6c4bb3", dark:"#432c7c",
+    note:"Tiene mucha personalidad, pero pierde contraste en escenas de noche."},
+};
+const CREAM = "#f2ebdf";
+
+/* Curvas del gorro, en coordenadas sin rotar. Bezier cuadrática: P0, C, P2. */
+const CUFF_TOP = [[54,76],[100,63],[148,76]];
+const CUFF_BOT = [[56,100],[100,87],[146,100]];
+const q = (c,t) => [0,1].map(i => (1-t)*(1-t)*c[0][i] + 2*(1-t)*t*c[1][i] + t*t*c[2][i]);
+const curve = (c) => `M${c[0]} Q${c[1]} ${c[2]}`;
+function ribs(n, straight){
+  let d = "";
+  for (let i=1;i<n;i++){
+    const u = i/n;
+    if (straight){ const x = 58 + 86*u; d += `M${x.toFixed(1)} 78 L${(x+1).toFixed(1)} 96 `; continue; }
+    const t = (1 - Math.cos(Math.PI*u)) / 2;            // más juntas en los bordes: el canto es un cilindro
+    const a = q(CUFF_TOP,t), b = q(CUFF_BOT,t);
+    const ia = [a[0] + (b[0]-a[0])*.12, a[1] + (b[1]-a[1])*.12], ib = [a[0] + (b[0]-a[0])*.88, a[1] + (b[1]-a[1])*.88];
+    d += `M${ia[0].toFixed(1)} ${ia[1].toFixed(1)} L${ib[0].toFixed(1)} ${ib[1].toFixed(1)} `;
+  }
+  return d;
+}
+/* Banda curva entre dos arcos paralelos al canto, para las rayas del gorro. */
+const band = (y, h) => `M40 ${y} Q100 ${y-14} 160 ${y} L160 ${y+h} Q100 ${y+h-14} 40 ${y+h} Z`;
+
+function hat(col, opts={}){
+  const c = COLORS[col], id = uid++;
+  const DOME = "M60 86 Q56 40 100 38 Q146 40 142 86 Z";
+  const CUFF = `${curve(CUFF_TOP)} L${CUFF_BOT[2]} Q${CUFF_BOT[1]} ${CUFF_BOT[0]} Z`;
+  return `<defs>
+      <clipPath id="d${id}"><path d="${DOME}"/></clipPath>
+      <radialGradient id="g${id}" cx="38%" cy="28%" r="80%"><stop offset="0" stop-color="#fff" stop-opacity=".28"/><stop offset=".45" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".32"/></radialGradient>
+      <linearGradient id="c${id}" x1="0" x2="1"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".3" stop-color="#fff" stop-opacity=".16"/><stop offset=".55" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".38"/></linearGradient>
+      <linearGradient id="v${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".18"/></linearGradient>
+      <clipPath id="h${id}"><circle cx="100" cy="96" r="40"/></clipPath>
+    </defs>
+    <g transform="rotate(-5 100 80)">
+      <path d="M50 96 Q100 84 150 96 L150 112 Q100 100 50 112 Z" fill="#2a3350" opacity=".22" clip-path="url(#h${id})"/>
+      <path d="${DOME}" fill="${c.base}"/>
+      <g clip-path="url(#d${id})"><path d="${band(58,8)}" fill="${CREAM}"/><path d="${band(72,8)}" fill="${CREAM}"/></g>
+      <path d="${DOME}" fill="url(#g${id})"/>
+      <path d="M116 48 Q127 56 131 68" stroke="${c.dark}" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>
+      <path d="${DOME}" fill="none" ${OUT}/>
+      <path d="${CUFF}" fill="${c.base}"/>
+      <path d="${ribs(13, opts.straight)}" stroke="${c.dark}" stroke-width="3" stroke-linecap="round"/>
+      <path d="${CUFF}" fill="url(#c${id})"/><path d="${CUFF}" fill="url(#v${id})"/>
+      <path d="${curve([[58,80],[100,68],[144,80]])}" stroke="#fff" stroke-opacity=".25" stroke-width="2" fill="none"/>
+      <path d="${CUFF}" fill="none" ${OUT}/>
+    </g>`;
+}
+
+const POSE = {
+  norm: {arms:"M100 150 L84 182 L80 210 M100 150 L118 178 L132 166", hands:[[80,212],[134,164]]},
+  shock:{arms:"M100 150 L74 138 L54 114 M100 150 L126 138 L146 114", hands:[[52,111],[148,111]]},
+  nerv: {arms:"M100 150 L84 174 L98 182 M100 150 L116 174 L104 184", hands:[[98,182],[104,184]]},
+  walk: {arms:"M100 150 L86 176 L74 198 M100 150 L112 178 L124 200", hands:[[73,200],[125,202]]},
+};
+function body(e){
+  const p = POSE[e];
+  const legs = e==="walk" ? "M100 220 L84 288 L72 290 M100 220 L114 286 L126 290" : "M100 220 L92 290 L80 292 M100 220 L110 290 L122 292";
+  return `<path d="M100 136 L100 220" ${LIMB}/><path d="${p.arms}" ${LIMB}/>
+    ${p.hands.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="${K}"/>`).join("")}
+    <path d="${legs}" ${LIMB}/>`;
+}
+function face(e){
+  const id = "f" + (uid++);
+  const r = e==="shock" ? [5.5,9] : e==="nerv" ? [3.8,5] : [4.2,6.8];
+  const extra = e==="nerv" ? `<path d="M69 99 L80 95 M98 96 L108 99" stroke="${K}" stroke-width="3" stroke-linecap="round"/>
+      <path d="M134 94 q5 8 0 11 q-5 -3 0 -11z" fill="#8fd0f0" stroke="${K}" stroke-width="2.5"/>`
+    : e==="shock" ? `<path d="M60 74 L52 68 M64 64 L58 56 M140 74 L148 68" stroke="${K}" stroke-width="3" stroke-linecap="round"/>` : "";
+  return `<defs><clipPath id="${id}"><circle cx="100" cy="96" r="42"/></clipPath></defs>
+    <circle cx="100" cy="96" r="42" fill="#d3d8e1"/>
+    <circle cx="108" cy="86" r="42" fill="#fff" clip-path="url(#${id})"/>
+    <circle cx="100" cy="96" r="42" fill="none" ${OUT}/>
+    <ellipse cx="76" cy="110" rx="${r[0]}" ry="${r[1]}" fill="${K}"/><ellipse cx="102" cy="110" rx="${r[0]}" ry="${r[1]}" fill="${K}"/>
+    <circle cx="77.5" cy="107" r="1.4" fill="#fff"/><circle cx="103.5" cy="107" r="1.4" fill="#fff"/>${extra}`;
+}
+const full = (col,e="norm") => `<svg viewBox="0 20 200 280" role="img" aria-label="Personaje, gorro ${COLORS[col].name}">${body(e)}${face(e)}${hat(col)}</svg>`;
+const bust = (col,e="norm",o={}) => `<svg viewBox="24 24 156 136" role="img" aria-label="${e}">${face(e)}${hat(col,o)}</svg>`;
+
+const SCENES = [["s-noche","noche"],["s-lampara","lámpara"],["s-bano","baño"],["s-gris","concreto"]];
+const POSES = ["norm","walk","nerv","shock"];
+document.getElementById("hero").innerHTML = SCENES.map(([cls,l],i)=>`<div class="scene ${cls}"><span class="lbl">${l}</span>${full("frambuesa",POSES[i])}</div>`).join("");
+
+document.getElementById("fix").innerHTML = `
+  <figure><div class="zoom">${bust("frambuesa","norm",{straight:true})}</div><figcaption><b>Antes</b>Líneas rectas y paralelas, no siguen el canto.</figcaption></figure>
+  <figure><div class="zoom">${bust("frambuesa","norm")}</div><figcaption><b>Ahora</b>Siguen la curva y se juntan hacia los bordes. Tiene luz, sombra y la sombra del gorro sobre la cabeza.</figcaption></figure>`;
+
+document.getElementById("colors").innerHTML = Object.entries(COLORS).map(([k,c])=>`
+  <div class="col${c.pick?" pick":""}">
+    <div class="mini">${SCENES.map(([cls])=>`<div class="scene ${cls}">${full(k)}</div>`).join("")}</div>
+    <div class="hd"><span class="chip" style="background:${c.base}"></span><h3>${c.name}</h3>${c.pick?'<span class="badge">Recomendado</span>':""}</div>
+    <p>${c.note}</p>
+  </div>`).join("");
+
+document.getElementById("expr").innerHTML = [["norm","normal"],["shock","¡¿qué?!"],["nerv","nervioso"],["walk","caminando"]]
+  .map(([e,l])=>`<div class="ex">${e==="walk"?full("frambuesa","walk"):bust("frambuesa",e)}<small>${l}</small></div>`).join("");
+</script>

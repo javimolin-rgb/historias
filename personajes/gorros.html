@@ -1,0 +1,204 @@
+<title>Mismo Cuerpo, Otro Gorro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600&family=Gochi+Hand&display=swap">
+<style>
+/* Layout: arriba, referencia vs. copia fiel lado a lado; abajo, grilla de gorros sobre el mismo cuerpo, en escena nocturna como la del video. */
+:root{
+  --bg:#eeede8; --fg:#1b1b1d; --muted:#67655f; --line:#d6d3ca; --card:#fafaf7; --accent:#d9472b;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Gochi Hand","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ff7350; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ff7350; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:40px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header{display:flex;flex-direction:column;gap:12px;max-width:72ch}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.5vw,54px);line-height:1.03;margin:0;text-wrap:balance}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(22px,3vw,28px);margin:0}
+header p{margin:0;color:var(--muted)}
+
+.compare{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px}
+.compare figure{margin:0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.compare img,.compare .scene{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:8px;border:3px solid #1b1b1d}
+.compare figcaption{font-size:13.5px;color:var(--muted)}
+.compare ul{margin:0;padding-left:18px;font-size:14px;display:flex;flex-direction:column;gap:4px;grid-column:1/-1}
+
+.scene{background:linear-gradient(180deg,#1d2a4d 0%,#2a3d6e 70%,#3a3532 70%,#4a3f37 100%);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.scene::before{content:"";position:absolute;inset:0 0 30% 0;background:repeating-linear-gradient(90deg,transparent 0 31%,#151d36 31% 33%)}
+.scene svg{position:relative;height:92%;width:auto;display:block}
+
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card.pick{border:2.5px solid var(--accent)}
+.card .scene{aspect-ratio:3/4;border-radius:6px;border:3px solid #1b1b1d}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px}
+.thumb{background:#e9e6df;border:2px solid #1b1b1d;border-radius:4px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.thumb svg{width:100%;height:auto;display:block}
+.thumb small{font-family:var(--hand);font-size:12.5px;color:#1b1b1d;background:#f6f4ef;width:100%;text-align:center}
+.headr{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+h3{font-family:var(--display);font-weight:800;font-size:19px;margin:0;line-height:1.15}
+.badge{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;color:#fff;background:var(--accent)}
+.card p{margin:0;font-size:14px}
+.card .risk{color:var(--muted);font-size:13px}
+
+.verdict{border-top:1.5px solid var(--line);padding-top:28px;display:flex;flex-direction:column;gap:10px;max-width:72ch}
+.verdict p{margin:0}
+
+@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.grid{grid-template-columns:minmax(0,1fr)}.compare{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Casting v4 · copia fiel, solo cambia el gorro</span>
+    <h1>Mismo cuerpo, otro gorro</h1>
+    <p>Copié el personaje del Instagram: cabeza blanca con sombra abajo, ojitos mirando de lado, sin boca, bufanda gris con la punta colgando y cuerpo de palitos con piernas largas. Lo único que cambia entre opciones es el gorro, y todos son gorros que usaría cualquier persona.</p>
+  </header>
+
+  <section class="compare">
+    <figure><img src="ref-beanie.jpg" alt="Personaje original del Instagram"><figcaption>Referencia (Instagram)</figcaption></figure>
+    <figure><div class="scene" id="copy"></div><figcaption>Copia en vector, con su mismo gorro mostaza (solo para comparar)</figcaption></figure>
+  </section>
+
+  <section style="display:flex;flex-direction:column;gap:14px">
+    <h2>8 gorros normales</h2>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="eyebrow">Mi recomendación</span>
+    <h2>Jockey rojo hacia adelante</h2>
+    <p>Es lo más normal del mundo y, aun así, es la silueta que más se separa del original: la visera se ve aunque el personaje sea una sombra. Los gorros de lana (con pompón, a rayas o corto) se ven igual de normales, pero corres el riesgo de que digan que copiaste al Beanie.</p>
+    <p>Segunda opción: <strong>jockey al revés</strong>, más juvenil. Tercera: <strong>gorro con pompón</strong>, si quieres quedarte cerca del original.</p>
+  </section>
+</div>
+
+<script>
+const K = "#161618";
+const W = 6;
+const LIMB = `stroke="${K}" stroke-width="${W}" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+const OUT = `stroke="${K}" stroke-width="5" stroke-linejoin="round"`;
+let uid = 0;
+
+/* Cuerpo: igual al de la referencia. Cabeza grande, cuello con bufanda, palitos largos. */
+const POSE = {
+  norm: {arms:"M100 156 L84 186 L80 214 M100 156 L118 182 L132 170", hands:[[80,216],[134,168]]},
+  shock:{arms:"M100 156 L78 140 L70 112 M100 156 L122 140 L130 112", hands:[[70,108],[130,108]]},
+  nerv: {arms:"M100 156 L84 178 L98 186 M100 156 L116 178 L104 188", hands:[[98,186],[104,188]]},
+};
+function body(e){
+  const p = POSE[e];
+  return `<path d="M100 146 L100 222" ${LIMB}/>
+    <path d="${p.arms}" ${LIMB}/>
+    ${p.hands.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="5" fill="${K}"/>`).join("")}
+    <path d="M100 222 L92 292 L80 294 M100 222 L110 292 L122 294" ${LIMB}/>`;
+}
+function scarf(){
+  return `<path d="M106 138 L110 182 L122 180 L119 138 Z" fill="#9c9fa3" ${OUT}/>
+    <path d="M76 126 Q100 140 126 126 L126 144 Q100 156 76 144 Z" fill="#a8abaf" ${OUT}/>
+    <path d="M84 134 Q100 144 118 134" stroke="#7f8286" stroke-width="2.5" fill="none"/>`;
+}
+function headShape(e){
+  const id = "h" + (uid++);
+  const eyeR = e==="shock" ? [5.5,9] : e==="nerv" ? [3.8,5] : [4.2,6.8];
+  const brows = e==="nerv" ? `<path d="M69 99 L80 95 M98 96 L108 99" stroke="${K}" stroke-width="3" stroke-linecap="round"/>
+     <path d="M134 92 q5 8 0 11 q-5 -3 0 -11z" fill="#8fd0f0" stroke="${K}" stroke-width="2.5"/>` : "";
+  return `<defs><clipPath id="${id}"><circle cx="100" cy="96" r="42"/></clipPath></defs>
+    <circle cx="100" cy="96" r="42" fill="#d6dae2"/>
+    <circle cx="108" cy="86" r="42" fill="#ffffff" clip-path="url(#${id})"/>
+    <circle cx="100" cy="96" r="42" fill="none" ${OUT}/>
+    <ellipse cx="76" cy="110" rx="${eyeR[0]}" ry="${eyeR[1]}" fill="${K}"/><ellipse cx="102" cy="110" rx="${eyeR[0]}" ry="${eyeR[1]}" fill="${K}"/>
+    <circle cx="77.5" cy="107" r="1.4" fill="#fff"/><circle cx="103.5" cy="107" r="1.4" fill="#fff"/>
+    ${brows}`;
+}
+
+/* Gorros. Todos se apoyan en la misma cabeza (centro 100,96, radio 42). */
+const ribs = (x1,x2,y1,y2,n,c) => Array.from({length:n},(_,i)=>{const x=x1+(x2-x1)*(i+.5)/n;return `M${x.toFixed(1)} ${y1} L${(x+1).toFixed(1)} ${y2}`;}).join(" ");
+function beanie(c, dark, extra=""){
+  return `<g transform="rotate(-5 100 80)">
+    <path d="M60 86 Q56 40 100 38 Q146 40 142 86 Z" fill="${c}" ${OUT}/>
+    <path d="M114 50 Q124 56 128 66" stroke="${dark}" stroke-width="3" fill="none" stroke-linecap="round"/>
+    ${extra}
+    <path d="M54 76 Q100 64 148 76 L146 100 Q100 88 56 100 Z" fill="${c}" ${OUT}/>
+    <path d="${ribs(58,144,78,96,11)}" stroke="${dark}" stroke-width="2.5"/></g>`;
+}
+const HATS = {
+  original: () => beanie("#c8942f","#8f6516"),
+  jockey: () => `<g transform="rotate(-6 100 80)">
+    <path d="M60 84 Q58 44 100 42 Q142 44 142 84 Q100 74 60 84 Z" fill="#c4352c" ${OUT}/>
+    <path d="M100 43 L100 76 M78 48 Q84 64 82 80" stroke="#8e2119" stroke-width="2.5" fill="none"/>
+    <path d="M64 82 Q40 80 22 92 Q46 100 74 88 Z" fill="#c4352c" ${OUT}/>
+    <circle cx="100" cy="42" r="4" fill="#c4352c" ${OUT}/></g>`,
+  reves: () => `<g transform="rotate(-6 100 80)">
+    <path d="M60 84 Q58 44 100 42 Q142 44 142 84 Q100 74 60 84 Z" fill="#2f6b4f" ${OUT}/>
+    <path d="M136 82 Q160 80 176 92 Q152 100 126 88 Z" fill="#2f6b4f" ${OUT}/>
+    <path d="M70 64 Q78 60 86 64 L84 78 Q78 76 72 78 Z" fill="#fff" ${OUT}/>
+    <path d="M100 43 L100 76" stroke="#1d4834" stroke-width="2.5"/>
+    <circle cx="100" cy="42" r="4" fill="#2f6b4f" ${OUT}/></g>`,
+  pescador: () => `<g transform="rotate(-5 100 80)">
+    <path d="M66 78 Q64 44 100 44 Q136 44 134 78 Z" fill="#c9b38a" ${OUT}/>
+    <path d="M48 86 Q100 66 152 86 Q154 96 144 96 Q100 80 56 96 Q46 96 48 86 Z" fill="#c9b38a" ${OUT}/>
+    <path d="M68 74 Q100 66 132 74" stroke="#8c7754" stroke-width="2.5" fill="none" stroke-dasharray="4 3"/></g>`,
+  corto: () => `<g transform="rotate(-5 100 70)">
+    <path d="M66 66 Q66 40 100 40 Q134 40 134 66 Z" fill="#2e4a7d" ${OUT}/>
+    <path d="M62 60 Q100 50 138 60 L137 76 Q100 66 63 76 Z" fill="#2e4a7d" ${OUT}/>
+    <path d="${ribs(66,134,62,73,9)}" stroke="#1b2f55" stroke-width="2.5"/></g>`,
+  pompon: () => beanie("#2f5f9e","#1d3f6e", `<circle cx="100" cy="34" r="13" fill="#e8e4da" ${OUT}/><path d="M94 30 l3 3 M104 28 l-2 4 M100 38 l2 -3" stroke="#a8a297" stroke-width="2"/>`),
+  rayas: () => { const id="r"+(uid++); return `<g transform="rotate(-5 100 80)">
+    <defs><clipPath id="${id}"><path d="M60 86 Q56 40 100 38 Q146 40 142 86 Z"/></clipPath></defs>
+    <path d="M60 86 Q56 40 100 38 Q146 40 142 86 Z" fill="#b8352d"/>
+    <g clip-path="url(#${id})"><rect x="50" y="48" width="100" height="7" fill="#f1ece2"/><rect x="50" y="62" width="100" height="7" fill="#f1ece2"/></g>
+    <path d="M60 86 Q56 40 100 38 Q146 40 142 86 Z" fill="none" ${OUT}/>
+    <path d="M54 76 Q100 64 148 76 L146 100 Q100 88 56 100 Z" fill="#b8352d" ${OUT}/>
+    <path d="${ribs(58,144,78,96,11)}" stroke="#7d1f19" stroke-width="2.5"/></g>`; },
+  chullo: () => `<g transform="rotate(-4 100 80)">
+    <path d="M60 92 L58 124 L72 120 L74 92 Z M128 92 L132 122 L144 118 L142 90 Z" fill="#b8352d" ${OUT}/>
+    <path d="M65 122 L66 144 M138 120 L140 142" stroke="${K}" stroke-width="3"/>
+    <circle cx="66" cy="148" r="5" fill="#f1ece2" ${OUT}/><circle cx="140" cy="146" r="5" fill="#f1ece2" ${OUT}/>
+    <path d="M58 94 Q54 40 100 38 Q148 40 144 94 Q100 80 58 94 Z" fill="#b8352d" ${OUT}/>
+    <path d="M60 78 L68 70 L76 78 L84 70 L92 78 L100 70 L108 78 L116 70 L124 78 L132 70 L140 78" stroke="#f1ece2" stroke-width="3.5" fill="none"/>
+    <circle cx="100" cy="36" r="6" fill="#f1ece2" ${OUT}/></g>`,
+};
+
+function figure(hat, e){
+  return `<svg viewBox="0 18 200 284" role="img" aria-label="Personaje ${e}">${body(e)}${headShape(e)}${scarf()}${HATS[hat]()}</svg>`;
+}
+function bust(hat, e){
+  return `<svg viewBox="12 20 180 180" role="img" aria-label="${e}">${headShape(e)}${scarf()}${HATS[hat]()}</svg>`;
+}
+
+const OPTS = [
+  {hat:"jockey",  name:"Jockey rojo", pick:true, note:"El gorro más común que existe. La visera cambia toda la silueta.", risk:"Ninguno: no se confunde con el original."},
+  {hat:"reves",   name:"Jockey al revés", note:"Verde botella, con la visera hacia atrás. Más juvenil y relajado.", risk:"Bajo: la visera atrás se lee bien de perfil."},
+  {hat:"pompon",  name:"Gorro con pompón", note:"Gorro de lana azul con pompón crema. Invernal y simpático.", risk:"Medio: es pariente directo del gorro del Beanie."},
+  {hat:"corto",   name:"Gorro corto", note:"Gorro de lana azul marino que queda arriba de las orejas, como de pescador urbano.", risk:"Medio: se distingue por el tamaño, no por la forma."},
+  {hat:"rayas",   name:"Gorro a rayas", note:"Gorro rojo con dos rayas crema. Clásico de invierno.", risk:"Medio: misma forma que el original, cambia el diseño."},
+  {hat:"pescador",name:"Gorro pescador", note:"Beige, de tela. Normal y de moda.", risk:"Bajo."},
+  {hat:"chullo",  name:"Chullo", note:"Gorro andino con orejeras, cordones y dibujo en zigzag. Le da identidad latina.", risk:"Bajo, pero es el más llamativo de todos."},
+  {hat:"original",name:"Original (referencia)", note:"El gorro mostaza del Beanie, para comparar. No es una opción.", risk:"Es copia directa."},
+];
+const EX = [["norm","normal"],["shock","¡¿qué?!"],["nerv","nervioso"]];
+
+document.getElementById("copy").innerHTML = figure("original","norm");
+document.getElementById("grid").innerHTML = OPTS.map(o => `
+  <article class="card${o.pick?" pick":""}">
+    <div class="scene" data-hat="${o.hat}">${figure(o.hat,"norm")}</div>
+    <div class="thumbs">${EX.map(([e,l])=>`<div class="thumb">${bust(o.hat,e)}<small>${l}</small></div>`).join("")}</div>
+    <div class="headr"><h3>${o.name}</h3>${o.pick?'<span class="badge">Recomendado</span>':""}</div>
+    <p>${o.note}</p>
+    <p class="risk">Riesgo de parecer copia: ${o.risk}</p>
+  </article>`).join("");
+
+const seq = ["norm","norm","norm","shock","norm","nerv"];
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  let t = 0;
+  setInterval(() => { t++;
+    document.querySelectorAll(".card .scene").forEach((s,i) => { s.innerHTML = figure(s.dataset.hat, seq[(t+i)%seq.length]); });
+  }, 1000);
+}
+</script>

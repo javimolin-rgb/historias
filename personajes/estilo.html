@@ -1,0 +1,337 @@
+<title>Polerones y Peinados</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Figtree:wght@400;600&family=Gochi+Hand&display=swap">
+<style>
+/* Layout: casting v3. Bloque 1 = estudio del polerón (6 variantes + paleta). Bloque 2 = 12 señas cosméticas (gorros y peinados). */
+:root{
+  --bg:#eeede8; --fg:#1b1b1d; --muted:#67655f; --line:#d6d3ca; --card:#fafaf7; --accent:#d9472b;
+  --display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --body:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hand:"Gochi Hand","Comic Sans MS",cursive;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ff7350; color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#17171a; --fg:#eeede9; --muted:#a19f98; --line:#35353a; --card:#212125; --accent:#ff7350; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15.5px;line-height:1.5;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:40px 64px}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:36px}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+header{display:flex;flex-direction:column;gap:12px;max-width:72ch}
+h1{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.5vw,54px);line-height:1.03;margin:0;text-wrap:balance}
+header p{margin:0;color:var(--muted)}
+.rule{display:flex;flex-wrap:wrap;gap:8px}
+.rule span{border:1.5px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px}
+.rule .no{text-decoration:line-through;color:var(--muted)}
+
+.sec{display:flex;flex-direction:column;gap:16px}
+.sec-head{display:flex;flex-direction:column;gap:6px;max-width:72ch}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(24px,3.4vw,32px);margin:0;line-height:1.1}
+.sec-head p{margin:0;color:var(--muted)}
+.sub{font-family:var(--display);font-weight:800;font-size:18px;margin:8px 0 0}
+
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.pick{border:2.5px solid var(--accent)}
+.panel{border:3px solid #1b1b1d;border-radius:6px;aspect-ratio:4/3;max-width:100%;position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
+.panel svg{height:96%;width:auto;display:block;position:relative}
+.floor{position:absolute;left:0;right:0;bottom:0;height:12%;background:rgba(0,0,0,.08)}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.thumb{border:2px solid #1b1b1d;border-radius:4px;display:flex;flex-direction:column;align-items:center;overflow:hidden}
+.thumb svg{width:70%;height:auto;display:block}
+.thumb small{font-family:var(--hand);font-size:13px;color:#1b1b1d;background:rgba(255,255,255,.75);width:100%;text-align:center}
+.head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.num{font-family:var(--display);font-weight:800;color:var(--muted);font-size:13px}
+h3{font-family:var(--display);font-weight:800;font-size:22px;margin:0;line-height:1.1}
+.alias{color:var(--muted);font-size:14px}
+.badge{font-size:11.5px;font-weight:600;padding:3px 9px;border-radius:999px;letter-spacing:.04em;color:#fff;background:var(--accent);white-space:nowrap}
+.tag{font-family:var(--hand);font-size:19px;line-height:1.2;margin:0}
+dl{display:flex;flex-direction:column;gap:6px;margin:0}
+dl div{display:grid;grid-template-columns:78px minmax(0,1fr);gap:8px}
+dt{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600;padding-top:2px}
+dd{margin:0;font-size:14px}
+
+.palette{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.swatches{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.sw{display:flex;flex-direction:column;gap:6px;align-items:center;min-width:0}
+.sw .box{width:100%;aspect-ratio:1/1;border-radius:6px;display:grid;place-items:center;overflow:hidden;border:2px solid #1b1b1d}
+.sw .box.dark{background:#1f2433}
+.sw .box svg{width:80%;height:auto}
+.sw span{font-size:13px;text-align:center}
+.sw.pick span{font-weight:600;color:var(--accent)}
+.palette p{margin:0;font-size:14px;color:var(--muted)}
+
+.verdict{border-top:1.5px solid var(--line);padding-top:28px;display:flex;flex-direction:column;gap:10px;max-width:72ch}
+.verdict ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+.verdict p{margin:0}
+
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.swatches{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:620px){.grid{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<div class="wrap">
+  <header>
+    <span class="eyebrow">Casting v3 · señas que no sirven para nada</span>
+    <h1>El polerón y otras 12 señas puramente estéticas</h1>
+    <p>Mismo cuerpo de palitos y cabeza blanca de tus referencias. Ninguno lleva objetos que cambien la historia: solo ropa, gorros o peinados que lo hacen reconocible, como el gorrito del Beanie. Lo único que cambia entre expresiones es un pequeño gag visual.</p>
+    <div class="rule"><span>Gorros</span><span>Peinados</span><span>Ropa</span><span class="no">Linterna</span><span class="no">Mochila</span><span class="no">Herramientas</span></div>
+  </header>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">Bloque 1</span>
+      <h2>El polerón, en 6 versiones</h2>
+      <p>La base: capucha siempre puesta y la cara asomando. Gag común a todas: cuando se pone nervioso, <strong>tira los cordones y la capucha se le cierra</strong> hasta que solo se le ven los ojos. Se reconoce al tiro y se anima cambiando una sola pieza.</p>
+    </div>
+    <div class="grid" id="hoodies"></div>
+    <div class="palette">
+      <h3 class="sub">¿De qué color?</h3>
+      <div class="swatches" id="swatches"></div>
+      <p>Evita el mostaza (es el del Beanie). Rojo y naranjo son los que más resaltan en escenas oscuras y en la miniatura del feed.</p>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sec-head">
+      <span class="eyebrow">Bloque 2</span>
+      <h2>Otras señas: gorros y peinados</h2>
+      <p>Mismo principio: un rasgo que no sirve para nada pero que se lee en un ícono de 40 px.</p>
+    </div>
+    <h3 class="sub">Gorros</h3>
+    <div class="grid" id="hats"></div>
+    <h3 class="sub">Peinados</h3>
+    <div class="grid" id="hair"></div>
+  </section>
+
+  <section class="verdict">
+    <span class="eyebrow">Mi recomendación</span>
+    <h2>Polerón con capucha de duende (C), en rojo</h2>
+    <p>Es la silueta más única de todas: la punta caída se reconoce incluso como sombra y no se parece a ningún canal del género. Además se mueve sola (con el susto, la punta se para), así que el personaje tiene vida sin animar casi nada.</p>
+    <ol>
+      <li><strong>Polerón duende (C):</strong> el que más se diferencia, muy fácil de convertir en merch.</li>
+      <li><strong>Polerón con orejitas (B):</strong> el más tierno. Funciona muy bien en TikTok e Instagram.</li>
+      <li><strong>Gorro de fiesta (Fiestas):</strong> el más absurdo. Que use gorro de cumpleaños en pleno apocalipsis genera curiosidad sola.</li>
+    </ol>
+    <p>Combinación posible: polerón duende y la curita de Remi en la cara.</p>
+  </section>
+</div>
+
+<script>
+const K = "#1b1b1d";
+const L = `stroke="${K}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"`;
+const O = `stroke="${K}" stroke-width="4" stroke-linejoin="round"`;
+const HAIR = "#2b2420";
+
+const ARMS = {shock:"M100 118 L80 100 L72 78 M100 118 L120 100 L128 78",
+              nerv:"M100 118 L86 136 L98 144 M100 118 L114 136 L102 144",
+              norm:"M100 118 L86 140 L82 162 M100 118 L114 140 L118 162"};
+function limbs(e){
+  return `<path d="M100 104 L100 170" ${L}/><path d="${ARMS[e]}" ${L}/>
+          <path d="M100 170 L90 222 L82 224 M100 170 L110 222 L118 224" ${L}/>`;
+}
+const head = () => `<circle cx="100" cy="72" r="34" fill="#fff" ${O}/>`;
+function eyes(e, o={}){
+  const y = o.y ?? 74, g = o.gap ?? 12, a = 100-g, b = 100+g, s0 = o.scale ?? 1;
+  const ry = (e==="shock" ? 10 : e==="nerv" ? 5.5 : 7.5)*s0, rx = (e==="shock" ? 6.5 : 4.5)*s0;
+  let s = o.hideEyes ? "" : `<ellipse cx="${a}" cy="${y}" rx="${rx}" ry="${ry}" fill="${K}"/><ellipse cx="${b}" cy="${y}" rx="${rx}" ry="${ry}" fill="${K}"/>`;
+  if (e==="nerv") s += `<path d="M${a-6} ${y-11} L${a+5} ${y-15} M${b+6} ${y-11} L${b-5} ${y-15}" stroke="${K}" stroke-width="3.5" stroke-linecap="round"/>
+     <path d="M${b+20} ${y-14} q5 8 0 11 q-5 -3 0 -11z" fill="#7cc7ee" stroke="${K}" stroke-width="2.5"/>`;
+  if (e==="shock" && !o.noMouth) s += `<ellipse cx="100" cy="${y+20}" rx="4.5" ry="6" fill="${K}"/>`;
+  if (e==="nerv" && !o.noMouth) s += `<path d="M92 ${y+20} q2 -3 4 0 q2 3 4 0 q2 -3 4 0 q2 3 4 0" stroke="${K}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  return s;
+}
+
+/* ---------- Bloque 1: polerones ---------- */
+const HOOD = "M100 30 C136 30 146 62 140 92 C136 112 122 120 100 120 C78 120 64 112 60 92 C54 62 64 30 100 30 Z";
+const GNOME = {
+  norm:"M100 30 C122 26 150 12 170 26 C152 26 142 44 140 72 C140 94 136 112 100 120 C78 120 64 112 60 92 C54 62 66 32 100 30 Z",
+  nerv:"M100 30 C122 26 150 12 170 26 C152 26 142 44 140 72 C140 94 136 112 100 120 C78 120 64 112 60 92 C54 62 66 32 100 30 Z",
+  shock:"M100 30 C108 22 112 4 118 -6 C122 16 134 34 140 62 C144 90 136 112 100 120 C78 120 64 112 60 92 C54 62 66 32 100 30 Z"};
+
+function hoodie(e, c, v={}){
+  const tight = e==="nerv" && !v.zip;
+  const back = (v.ears ? `<path d="M68 54 L70 22 L92 36 Z M132 54 L130 22 L108 36 Z" fill="${c}" ${O}/>` : "");
+  const shell = `<path d="${v.gnome ? GNOME[e] : HOOD}" fill="${c}" ${O}/>`;
+  const torso = v.sleeves
+    ? `<path d="${ARMS[e]}" stroke="${K}" stroke-width="19" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+       <path d="${ARMS[e]}" stroke="${c}" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+       <rect x="80" y="106" width="40" height="56" rx="14" fill="${c}" ${O}/>`
+    : `<rect x="84" y="108" width="32" height="50" rx="12" fill="${c}" ${O}/>`;
+  const strings = v.strings
+    ? `<path d="M93 114 L91 132 M107 114 L110 162" stroke="#f4efe6" stroke-width="3.5" stroke-linecap="round"/>
+       <rect x="88" y="131" width="6" height="8" rx="2" fill="#f4efe6" stroke="${K}" stroke-width="2"/><rect x="107" y="161" width="6" height="8" rx="2" fill="#f4efe6" stroke="${K}" stroke-width="2"/>` : "";
+  const face = tight
+    ? `<ellipse cx="100" cy="80" rx="17" ry="19" fill="#fff" ${O}/>` + eyes(e,{y:80,gap:7,scale:.85,noMouth:true}) +
+      `<path d="M100 104 q-8 -6 -10 2 q4 4 10 -2 q8 -6 10 2 q-4 4 -10 -2" stroke="#f4efe6" stroke-width="3" fill="none"/>`
+    : `<ellipse cx="100" cy="78" rx="27" ry="30" fill="#fff" ${O}/>` + eyes(e,{y:v.zip?72:78,gap:11,noMouth:v.zip && e!=="shock"});
+  let zip = "";
+  if (v.zip){
+    const top = e==="shock" ? 100 : e==="nerv" ? 80 : 88;
+    zip = `<path d="M72 ${top} Q100 ${top+6} 128 ${top} L128 118 L72 118 Z" fill="${c}" ${O}/>
+      <path d="M100 ${top+3} L100 118" stroke="#d9d4c8" stroke-width="3" stroke-dasharray="2 3"/><rect x="96" y="${top+2}" width="8" height="9" rx="2" fill="#d9d4c8" stroke="${K}" stroke-width="2"/>`;
+  }
+  return (v.sleeves ? `<path d="M100 170 L90 222 L82 224 M100 170 L110 222 L118 224" ${L}/>` : limbs(e)) + torso + back + shell + face + zip + strings;
+}
+
+const hoodies = [
+ {n:"A", name:"Clásico", alias:"capucha arriba", c:"#c7372f",
+  tag:"Nunca se saca la capucha. Nadie le ha visto el pelo.",
+  trait:"La forma más limpia: un óvalo rojo con una cara blanca adentro.",
+  gag:"Nervioso: tira los cordones y se le cierra la capucha.", v:{}},
+ {n:"B", name:"Orejitas", alias:"capucha con orejas", c:"#7b5ea7",
+  tag:"El polerón de gato que se compró por error. Ahora es su identidad.",
+  trait:"Dos orejitas en la capucha. La silueta es inconfundible y muy tierna.",
+  gag:"Mismo gag de la capucha cerrada. Las orejas no se mueven.", v:{ears:true}},
+ {n:"C", name:"Duende", alias:"capucha puntiaguda", c:"#c7372f", pick:true,
+  tag:"La capucha tiene una punta larga que cae hacia un lado.",
+  trait:"Silueta única: se reconoce incluso como sombra.",
+  gag:"Con el susto la punta se para derecha. Nervioso: capucha cerrada.", v:{gnome:true}},
+ {n:"D", name:"Cordones", alias:"cordones disparejos", c:"#2a8c82",
+  tag:"Un cordón largo y uno corto. Le molesta, pero nunca lo arregla.",
+  trait:"Una asimetría mínima que la gente nota y comenta.",
+  gag:"Capucha cerrada y los cordones colgando.", v:{strings:true}},
+ {n:"E", name:"Mangas", alias:"polerón gigante", c:"#e0702b",
+  tag:"Le queda tres tallas grande. Las manos nunca se le ven.",
+  trait:"Mangas largas que le tapan las manos. Tierno y muy fácil de dibujar.",
+  gag:"Agita las mangas vacías con el susto.", v:{sleeves:true}},
+ {n:"F", name:"Cierre", alias:"cuello hasta la nariz", c:"#2f6fb0",
+  tag:"Se sube el cierre cada vez que algo le da miedo, o sea, siempre.",
+  trait:"Cuello alto que le tapa la boca. Solo se ven los ojos.",
+  gag:"El cierre sube y baja: abajo con el susto, arriba con los nervios.", v:{zip:true}},
+];
+
+/* ---------- Bloque 2: gorros y peinados ---------- */
+const basic = (e, top="", back="", o={}) => back + limbs(e) + head() + eyes(e,o) + top;
+const T = (e, shock, nerv) => e==="shock" ? shock : e==="nerv" ? nerv : "";
+
+const hats = [
+ {n:"01", name:"Pesca", alias:"gorro pescador", c:"#5b8fb9",
+  tag:"Nunca ha pescado en su vida.",
+  trait:"Gorro pescador celeste. Silueta ancha y caída, de moda y fácil de hacer merch.",
+  gag:"Con el susto el gorro salta. Nervioso: se lo baja hasta las cejas.",
+  draw:e=>basic(e, `<g transform="${T(e,"translate(0 -16)","translate(0 8)")}">
+    <path d="M74 52 Q74 26 100 26 Q126 26 126 52 Z" fill="#5b8fb9" ${O}/>
+    <path d="M60 56 Q100 42 140 56 Q146 64 136 64 Q100 54 64 64 Q54 64 60 56 Z" fill="#5b8fb9" ${O}/></g>`)},
+ {n:"02", name:"Boni", alias:"boina", c:"#8e2b3c",
+  tag:"Se cree artista. Nunca ha terminado un dibujo.",
+  trait:"Boina burdeo ladeada con un palito arriba. Elegante y absurda.",
+  gag:"Con el susto salta. Nervioso: se le resbala hacia un lado.",
+  draw:e=>basic(e, `<g transform="${T(e,"translate(0 -14)","rotate(-16 100 44)")}">
+    <ellipse cx="94" cy="44" rx="38" ry="13" fill="#8e2b3c" ${O} transform="rotate(-10 94 44)"/>
+    <path d="M96 32 L98 24" stroke="${K}" stroke-width="4" stroke-linecap="round"/></g>`)},
+ {n:"03", name:"Bombín", alias:"sombrero hongo", c:"#2b2b2e",
+  tag:"Viste para una cena elegante, incluso en el fin del mundo.",
+  trait:"Bombín negro con cinta roja. Contraste máximo sobre la cabeza blanca.",
+  gag:"Con el susto el sombrero sale volando. Nervioso: queda chueco.",
+  draw:e=>basic(e, `<g transform="${T(e,"translate(0 -22)","rotate(10 100 44)")}">
+    <path d="M78 46 Q78 14 100 14 Q122 14 122 46 Z" fill="#2b2b2e" ${O}/>
+    <rect x="78" y="38" width="44" height="6" fill="#b5332e"/>
+    <ellipse cx="100" cy="46" rx="34" ry="6" fill="#2b2b2e" ${O}/></g>`)},
+ {n:"04", name:"Fiestas", alias:"gorro de cumpleaños", c:"#ff6fa8", pick:true,
+  tag:"El apocalipsis empezó el día de su cumpleaños. No se lo ha sacado.",
+  trait:"Cono de fiesta rosado con rayas amarillas y pompón. Absurdo y memorable.",
+  gag:"Con el susto salta. Nervioso: el cono se dobla.",
+  draw:e=>basic(e, `<g transform="${T(e,"translate(0 -14)","rotate(18 100 44)")}">
+    <path d="M80 44 L100 2 L120 44 Z" fill="#ff6fa8" ${O}/>
+    <path d="M87 30 L113 30 M93 17 L107 17" stroke="#ffd23f" stroke-width="5"/>
+    <circle cx="100" cy="2" r="7" fill="#ffd23f" ${O}/></g>
+    <path d="M80 44 Q74 80 90 104 M120 44 Q126 80 110 104" stroke="${K}" stroke-width="1.5" fill="none"/>`)},
+ {n:"05", name:"Hélix", alias:"gorro con hélice", c:"#3d7dd8",
+  tag:"La hélice no lo hace volar. Lo ha intentado.",
+  trait:"Gorro con hélice roja y amarilla. Una silueta que nadie más usa en el género.",
+  gag:"Con el susto la hélice gira (líneas de movimiento). Nervioso: se detiene.",
+  draw:e=>basic(e, `<path d="M68 56 Q68 30 100 30 Q132 30 132 56 Z" fill="#3d7dd8" ${O}/>
+    <path d="M100 30 L100 56" stroke="#ffd23f" stroke-width="5"/>
+    <path d="M100 30 L100 18" stroke="${K}" stroke-width="4"/>
+    <ellipse cx="88" cy="17" rx="12" ry="4" fill="#d13a2e" ${O}/><ellipse cx="112" cy="17" rx="12" ry="4" fill="#ffd23f" ${O}/>
+    ${e==="shock"?`<path d="M70 10 Q100 0 130 10 M74 24 Q100 32 126 24" stroke="${K}" stroke-width="2.5" fill="none" stroke-dasharray="4 4"/>`:""}`)},
+ {n:"06", name:"Corsario", alias:"pañuelo amarrado", c:"#2a8c82",
+  tag:"Amarra el pañuelo como pirata, aunque le dé miedo el mar.",
+  trait:"Pañuelo turquesa con puntos y un nudo con dos puntas.",
+  gag:"Las puntas del nudo se levantan con el susto y caen con los nervios.",
+  draw:e=>{ const tails = e==="shock" ? "M134 58 L156 36 L150 52 Z M134 60 L162 54 L150 64 Z" : e==="nerv" ? "M134 60 L142 90 L132 82 Z M134 62 L150 86 L138 84 Z" : "M134 58 L156 62 L144 70 Z M134 60 L150 78 L138 74 Z";
+    return basic(e, `<path d="M66 62 Q64 32 100 30 Q136 32 134 62 Q100 50 66 62 Z" fill="#2a8c82" ${O}/>
+      <circle cx="86" cy="44" r="2.5" fill="#fff"/><circle cx="104" cy="38" r="2.5" fill="#fff"/><circle cx="118" cy="48" r="2.5" fill="#fff"/><circle cx="96" cy="52" r="2.5" fill="#fff"/>
+      <path d="${tails}" fill="#2a8c82" ${O}/><circle cx="134" cy="59" r="5" fill="#2a8c82" ${O}/>`); }},
+];
+
+function afro(e){
+  const s = e==="shock" ? 1.14 : 1, pts = [];
+  for (let i=0;i<16;i++){ const a = (i/16)*Math.PI*2; pts.push([100+Math.cos(a)*44, 58+Math.sin(a)*40]); }
+  return `<g transform="translate(100 58) scale(${s}) translate(-100 -58)">` +
+    pts.map(([x,y])=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="15" fill="${HAIR}" ${O}/>`).join("") +
+    `<ellipse cx="100" cy="58" rx="46" ry="42" fill="${HAIR}"/></g>`;
+}
+const CAP = `<path d="M66 64 Q64 36 100 36 Q136 36 134 64 Q120 48 100 48 Q80 48 66 64 Z" fill="${HAIR}" ${O}/>`;
+
+const hair = [
+ {n:"07", name:"Tupé", alias:"copete gigante", c:HAIR,
+  tag:"Se peina 20 minutos cada mañana, incluso con zombies afuera.",
+  trait:"Copete enorme hacia adelante, estilo rockabilly.",
+  gag:"Con el susto el copete se para. Nervioso: se le cae sobre la cara.",
+  draw:e=>basic(e, `<g transform="${T(e,"rotate(-20 96 52) translate(0 -6)","rotate(26 100 50)")}">
+    <path d="M68 58 Q62 30 92 22 Q132 12 150 34 Q130 30 120 42 Q110 54 68 58 Z" fill="${HAIR}" ${O}/></g>`)},
+ {n:"08", name:"Nube", alias:"afro redondo", c:HAIR,
+  tag:"Su pelo llega a la habitación dos segundos antes que él.",
+  trait:"Afro grande y redondo. Silueta enorme y clarísima, incluso en miniatura.",
+  gag:"Con el susto el afro se esponja. Cero esfuerzo extra.",
+  draw:e=>basic(e, "", afro(e), {})},
+ {n:"09", name:"Tomate", alias:"moño alto", c:HAIR,
+  tag:"Se amarra el pelo cuando se pone serio. Siempre está serio.",
+  trait:"Moño redondo en lo alto de la cabeza. Funciona igual para chica o chico.",
+  gag:"Con el susto el moño salta. Nervioso: se le ladea.",
+  draw:e=>basic(e, CAP + `<g transform="${T(e,"translate(0 -12)","rotate(-24 100 44)")}"><circle cx="100" cy="28" r="13" fill="${HAIR}" ${O}/>
+    <rect x="93" y="38" width="14" height="5" rx="2" fill="#e85d75"/></g>`)},
+ {n:"10", name:"Colitas", alias:"dos coletas", c:HAIR,
+  tag:"Dos coletas que se mueven más que ella.",
+  trait:"Coletas a los lados con colets rosados. Una protagonista fácil de reconocer.",
+  gag:"Con el susto las coletas se paran. Nervioso: se caen.",
+  draw:e=>{ const r = e==="shock" ? 60 : e==="nerv" ? -20 : 25;
+    return basic(e, CAP + `<g transform="rotate(${-r} 70 56)"><ellipse cx="54" cy="70" rx="11" ry="20" fill="${HAIR}" ${O}/><rect x="60" y="52" width="10" height="7" rx="2" fill="#e85d75" transform="rotate(-30 65 55)"/></g>
+      <g transform="rotate(${r} 130 56)"><ellipse cx="146" cy="70" rx="11" ry="20" fill="${HAIR}" ${O}/><rect x="130" y="52" width="10" height="7" rx="2" fill="#e85d75" transform="rotate(30 135 55)"/></g>`); }},
+ {n:"11", name:"Taza", alias:"pelo de taza", c:HAIR,
+  tag:"Su mamá le cortó el pelo con una taza en 2009. Nunca lo cambió.",
+  trait:"Corte de taza recto que le tapa media cabeza. Los ojos asoman justo debajo.",
+  gag:"Con el susto el flequillo se levanta. Nervioso: le tapa los ojos.",
+  draw:e=>{ const y = e==="shock" ? 64 : e==="nerv" ? 82 : 74;
+    return basic(e, `<path d="M64 ${y} Q60 34 100 34 Q140 34 136 ${y} Z" fill="${HAIR}" ${O}/>`, "", {y:84, hideEyes:e==="nerv"}); }},
+ {n:"12", name:"Rulo", alias:"un solo pelo", c:HAIR,
+  tag:"Tiene un solo pelo. Lo cuida más que a su vida.",
+  trait:"Un único rulo en la punta de la cabeza. Es lo más simple posible y aun así se reconoce.",
+  gag:"Con el susto el rulo se estira derecho. Nervioso: se marchita.",
+  draw:e=>{ const p = e==="shock" ? "M100 38 L100 8" : e==="nerv" ? "M100 38 Q112 30 118 42" : "M100 38 C98 20 116 18 113 30 C110 40 96 32 104 24";
+    return basic(e, `<path d="${p}" stroke="${K}" stroke-width="4" fill="none" stroke-linecap="round"/>`); }},
+];
+
+/* ---------- render ---------- */
+const EX = [["norm","normal"],["shock","¡¿qué?!"],["nerv","nervioso"]];
+const BG = ["#e8e5df","#dfe3ea","#efe4d6","#dde7e2","#ece2e7","#e3e6d8"];
+const svg = (c,e) => `<svg viewBox="0 -12 200 244" role="img" aria-label="${c.name}, ${e}">${c.draw(e)}</svg>`;
+hoodies.forEach(h => h.draw = e => hoodie(e, h.c, h.v));
+
+function cards(list, id){
+  document.getElementById(id).innerHTML = list.map((c,i) => {
+    const bg = BG[i % BG.length];
+    return `<article class="card${c.pick?" pick":""}">
+      <div class="panel" style="background:${bg}"><div class="floor"></div>${svg(c,"norm")}</div>
+      <div class="thumbs">${EX.map(([e,l])=>`<div class="thumb" style="background:${bg}">${svg(c,e)}<small>${l}</small></div>`).join("")}</div>
+      <div class="head"><span class="num">${c.n}</span><h3>${c.name}</h3><span class="alias">${c.alias}</span>${c.pick?'<span class="badge">Top</span>':""}</div>
+      <p class="tag">${c.tag}</p>
+      <dl><div><dt>Rasgo</dt><dd>${c.trait}</dd></div><div><dt>Gag</dt><dd>${c.gag}</dd></div></dl>
+    </article>`; }).join("");
+}
+cards(hoodies,"hoodies"); cards(hats,"hats"); cards(hair,"hair");
+
+const COLORS = [["Rojo","#c7372f",1],["Naranjo","#e0702b",1],["Verde","#3f8f5a"],["Morado","#7b5ea7"],["Azul","#2f6fb0"],["Rosado","#e06c9f"]];
+document.getElementById("swatches").innerHTML = COLORS.map(([n,c,p]) =>
+  `<div class="sw${p?" pick":""}"><div class="box dark"><svg viewBox="50 -10 130 140">${hoodie("norm",c,{gnome:true})}</svg></div><span>${n}${p?" · recomendado":""}</span></div>`).join("");
+
+const all = [...hoodies, ...hats, ...hair];
+const seq = ["norm","norm","shock","norm","nerv","nerv"];
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  let t = 0;
+  setInterval(() => { t++;
+    document.querySelectorAll(".panel").forEach((p,i) => { p.querySelector("svg").outerHTML = svg(all[i], seq[(t+i)%seq.length]); });
+  }, 900);
+}
+</script>
