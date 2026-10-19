@@ -103,115 +103,134 @@ function cama({ largo = 64 } = {}) {
   return mezcla.map(c => c.subarray(0, n - cruce));
 }
 
-/* ---------------- efectos ---------------- */
+/* ---------------- efectos ----------------
+
+   Criterios, despues de que la primera version sonara a fallo tecnico y no a sonido:
+   - Nada arranca ni corta de golpe: todo pasa por bordes(), si no se oye un clic digital.
+   - Nada de barridos de frecuencia ni portadoras puras: eso es lo que suena a "error".
+   - Todo filtrado por debajo de los 4 kHz. El filo agudo es lo que molesta sobre la voz.
+   - Son efectos de apoyo, no de primer plano: se mezclan bajos en el guion (volumenSfx). */
+
+/* Normaliza un efecto a un pico comodo y le suaviza los bordes. */
+function acabar(canales, picoObjetivo = 0.7) {
+  const p = Math.max(...canales.map(W.pico)) || 1;
+  const g = picoObjetivo / p;
+  return canales.map(c => W.bordes(Float64Array.from(c, v => v * g), 14));
+}
 
 const EFECTOS = {
-  /* Celular vibrando sobre una mesa: zumbido grave con traqueteo encima. */
+  /* Celular vibrando sobre una superficie dura. */
   vibracion() {
-    const n = Math.round(1.9 * SR), x = new Float64Array(n);
-    const traqueteo = W.pasabajos(W.ruidoMarron(n, 5), 2400);
+    const n = Math.round(1.8 * SR), x = new Float64Array(n);
+    const traqueteo = W.pasabajos(W.ruidoMarron(n, 5), 1400);
     for (let pulso = 0; pulso < 3; pulso++) {
-      const desde = Math.round(pulso * 0.62 * SR), largo = Math.round(0.34 * SR);
+      const desde = Math.round(pulso * 0.6 * SR), largo = Math.round(0.3 * SR);
       for (let i = 0; i < largo; i++) {
         const t = i / SR, idx = desde + i;
         if (idx >= n) break;
-        const env = Math.min(1, i / (0.01 * SR)) * Math.min(1, (largo - i) / (0.02 * SR));
-        x[idx] += (Math.sin(tau * 58 * t) * 0.5 + Math.sin(tau * 116 * t) * 0.18) * env;
-        x[idx] += traqueteo[idx] * 0.35 * env;
+        /* ataque de 25 ms: a 1 ms se oye el clic antes que el zumbido */
+        const env = Math.min(1, i / (0.025 * SR)) * Math.min(1, (largo - i) / (0.05 * SR));
+        x[idx] += (Math.sin(tau * 56 * t) * 0.5 + Math.sin(tau * 112 * t) * 0.12) * env;
+        x[idx] += traqueteo[idx] * 0.22 * env;
       }
     }
-    return [x, x];
+    return acabar([x, Float64Array.from(x, v => v * 0.95)]);
   },
 
-  /* Tres golpes en una puerta: impacto con cuerpo de madera. */
+  /* Tres golpes en una puerta. El cuerpo lo da la resonancia de la madera, no un tono. */
   golpes() {
-    const n = Math.round(2.2 * SR), x = new Float64Array(n);
-    const ruido = W.ruidoMarron(n, 11);
+    const n = Math.round(2.1 * SR), x = new Float64Array(n);
+    const ruido = W.pasabajos(W.ruidoMarron(n, 11), 2200);
+    const madera = W.banda(ruido, 165, 2.4);
     for (let k = 0; k < 3; k++) {
-      const desde = Math.round((0.1 + k * 0.52) * SR);
-      const env = W.envolvente(Math.round(0.6 * SR), 0.002, 0.075);
-      for (let i = 0; i < env.length && desde + i < n; i++) {
-        const t = i / SR;
-        x[desde + i] += (Math.sin(tau * 92 * t) * 0.6 + Math.sin(tau * 147 * t) * 0.3
-          + W.pasabajos(ruido.subarray(desde, desde + 1), 900)[0] * 0) * env[i];
-        x[desde + i] += ruido[desde + i] * 0.5 * env[i];
-      }
+      const desde = Math.round((0.12 + k * 0.5) * SR);
+      const env = W.envolvente(Math.round(0.5 * SR), 0.006, 0.065);
+      for (let i = 0; i < env.length && desde + i < n; i++)
+        x[desde + i] += (madera[desde + i] * 1.5 + ruido[desde + i] * 0.4) * env[i] * (k === 1 ? 1 : 0.86);
     }
-    return [x, Float64Array.from(x, v => v * 0.92)];
+    return acabar([x, Float64Array.from(x, v => v * 0.9)]);
   },
 
-  /* Techo crujiendo bajo peso: roce lento que sube de tono. */
+  /* Techo crujiendo bajo peso: roce lento, sin oscilador a la vista. */
   crujido() {
-    const n = Math.round(2.6 * SR), x = new Float64Array(n);
-    const r = W.pasabajos(W.ruidoMarron(n, 17), 1100);
+    const n = Math.round(2.4 * SR);
+    const r = W.pasabajos(W.ruidoMarron(n, 17), 1500);
+    const cuerpo = W.banda(r, 420, 3);
+    const x = new Float64Array(n);
     for (let i = 0; i < n; i++) {
-      const t = i / SR, fase = i / n;
-      const env = Math.sin(Math.PI * fase) ** 1.4;
-      const rechinar = Math.sin(tau * (180 + 90 * fase) * t + Math.sin(tau * 7 * t) * 2);
-      x[i] = (rechinar * 0.22 + r[i] * 0.8) * env;
+      const fase = i / n;
+      /* el roce va y viene: dos lobulos, no una rampa */
+      const env = (Math.sin(Math.PI * fase) ** 1.6) * (0.6 + 0.4 * Math.sin(tau * fase * 2.5));
+      x[i] = (cuerpo[i] * 2.2 + r[i] * 0.5) * Math.max(0, env);
     }
-    return [x, Float64Array.from(x, (v, i) => v * (0.8 + 0.2 * Math.sin(i / 9000)))];
+    return acabar([x, Float64Array.from(x, (v, i) => v * (0.82 + 0.18 * Math.sin(i / 11000)))], 0.6);
   },
 
   /* Racha de viento con ceniza. */
   viento() {
-    const n = Math.round(4 * SR);
-    const a = W.pasabajos(W.ruidoMarron(n, 23), 900);
-    const b = W.pasabajos(W.ruidoMarron(n, 29), 760);
+    const n = Math.round(3.6 * SR);
+    const a = W.pasabajos(W.ruidoMarron(n, 23), 700);
+    const b = W.pasabajos(W.ruidoMarron(n, 29), 620);
     const L = new Float64Array(n), R = new Float64Array(n);
     for (let i = 0; i < n; i++) {
-      const fase = i / n, env = Math.sin(Math.PI * fase) ** 1.6;
-      L[i] = a[i] * 1.1 * env; R[i] = b[i] * 1.1 * env;
+      const fase = i / n, env = Math.sin(Math.PI * fase) ** 1.7;
+      L[i] = a[i] * env; R[i] = b[i] * env;
     }
-    return [L, R];
+    return acabar([L, R], 0.6);
   },
 
-  /* Radio con estatica y portadora: lo que suena cuando no hay nadie del otro lado. */
+  /* Radio sin senal. Sin portadora: ese pitido de 1 kHz era justo lo que sonaba a error. */
   estatica() {
-    const n = Math.round(3 * SR);
-    const r = W.pasaaltos(W.pasabajos(W.ruidoMarron(n, 41), 5200), 300);
+    const n = Math.round(2.8 * SR);
+    const r = W.pasaaltos(W.pasabajos(W.ruidoMarron(n, 41), 2600), 500);
     const x = new Float64Array(n);
     for (let i = 0; i < n; i++) {
       const t = i / SR;
-      const parpadeo = 0.6 + 0.4 * Math.sin(tau * 3.1 * t) * Math.sin(tau * 11.7 * t);
-      x[i] = r[i] * 2.4 * parpadeo + Math.sin(tau * 1000 * t) * 0.012;
+      /* parpadeo lento: a 11 Hz sonaba a interferencia digital */
+      const parpadeo = 0.55 + 0.45 * Math.sin(tau * 1.3 * t) * Math.sin(tau * 2.9 * t);
+      x[i] = r[i] * 2.2 * parpadeo * Math.sin(Math.PI * i / n) ** 0.5;
     }
-    return [x, Float64Array.from(x, v => v * 0.9)];
+    return acabar([x, Float64Array.from(x, v => v * 0.92)], 0.55);
   },
 
-  /* Interruptor o linterna. */
+  /* Interruptor o rele: un golpe seco y corto, grave, sin brillo. */
   clic() {
-    const n = Math.round(0.35 * SR), x = new Float64Array(n);
-    const r = W.ruidoMarron(n, 3);
-    const env = W.envolvente(n, 0.0008, 0.012);
-    for (let i = 0; i < n; i++) x[i] = (r[i] * 1.6 + Math.sin(tau * 1800 * i / SR) * 0.3) * env[i];
-    return [x, x];
+    const n = Math.round(0.5 * SR), x = new Float64Array(n);
+    const r = W.pasabajos(W.ruidoMarron(n, 3), 1200);
+    const env = W.envolvente(n, 0.004, 0.035);
+    for (let i = 0; i < n; i++) x[i] = (W.banda(r, 220, 2)[0] * 0 + r[i] * 1.4) * env[i];
+    const cuerpo = W.banda(x, 190, 2.5);
+    for (let i = 0; i < n; i++) x[i] = x[i] * 0.5 + cuerpo[i] * 1.6;
+    return acabar([x, x], 0.6);
   },
 
-  /* Golpe seco de tension para los sustos. */
+  /* Golpe de tension: una hinchazon grave que crece y se va. Sin barrido ni transitorio. */
   impacto() {
-    const n = Math.round(2.4 * SR), x = new Float64Array(n);
-    const env = W.envolvente(n, 0.003, 0.5);
-    const r = W.pasabajos(W.ruidoMarron(n, 13), 2000);
-    for (let i = 0; i < n; i++) {
-      const t = i / SR;
-      const barrido = 120 * Math.exp(-t * 2.2) + 32;
-      x[i] = (Math.sin(tau * barrido * t) * 0.8 + r[i] * 0.6) * env[i];
-    }
-    return [x, x];
-  },
-
-  /* Persiana metalica bajando y trabandose. */
-  persiana() {
-    const n = Math.round(2.8 * SR), x = new Float64Array(n);
-    const r = W.pasabajos(W.ruidoMarron(n, 19), 3000);
+    const n = Math.round(2.6 * SR), x = new Float64Array(n);
+    const r = W.pasabajos(W.ruidoMarron(n, 13), 500);
+    const grave = W.banda(r, 70, 1.8);
     for (let i = 0; i < n; i++) {
       const t = i / SR, fase = i / n;
-      const traqueteo = Math.sin(tau * 26 * t) > 0.6 ? 1 : 0.25;
-      const env = fase < 0.75 ? 1 - fase * 0.4 : Math.max(0, (1 - fase) / 0.25);
-      x[i] = r[i] * 1.5 * traqueteo * env;
+      /* ataque de 180 ms: lo que daba miedo era el golpe, pero tambien lo que sonaba a fallo */
+      const env = Math.min(1, t / 0.18) * Math.exp(-Math.max(0, t - 0.18) * 1.9);
+      x[i] = (grave[i] * 2.6 + Math.sin(tau * 48 * t) * 0.25) * env;
     }
-    return [x, Float64Array.from(x, v => v * 0.88)];
+    return acabar([x, x], 0.62);
+  },
+
+  /* Persiana metalica: traqueteo con puerta suave, no recortada. */
+  persiana() {
+    const n = Math.round(2.4 * SR), x = new Float64Array(n);
+    const r = W.pasabajos(W.ruidoMarron(n, 19), 1900);
+    const metal = W.banda(r, 760, 2.6);
+    for (let i = 0; i < n; i++) {
+      const t = i / SR, fase = i / n;
+      /* la puerta es una sinusoide elevada, no un umbral: recortar producia stutter digital */
+      const traqueteo = 0.3 + 0.7 * Math.max(0, Math.sin(tau * 19 * t)) ** 1.5;
+      const env = fase < 0.7 ? 1 - fase * 0.35 : Math.max(0, (1 - fase) / 0.3);
+      x[i] = (metal[i] * 1.6 + r[i] * 0.5) * traqueteo * env;
+    }
+    return acabar([x, Float64Array.from(x, v => v * 0.88)], 0.58);
   },
 };
 
@@ -233,7 +252,7 @@ function main() {
     const dir = mkdir(path.join(base, "sfx"));
     for (const [nombre, fn] of Object.entries(EFECTOS)) {
       const ruta = path.join(dir, `${nombre}.wav`);
-      const d = W.escribir(ruta, fn().map(c => Float64Array.from(c, W.suavizar)));
+      const d = W.escribir(ruta, fn());
       hechos.push(`sfx/${nombre}.wav  ${d.toFixed(2)}s`);
     }
   }

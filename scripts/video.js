@@ -16,9 +16,9 @@ const SALIDA = { "16x9": "youtube", "9x16": "vertical" };
 /* El grano de las escenas encarece mucho el encode: con "medium" el pase final se va al
    triple de tiempo sin verse mejor. veryfast + crf bajo da mas calidad y mas rapido. */
 const CALIDAD = { normal: { preset: "veryfast", crf: "18" }, rapida: { preset: "veryfast", crf: "23" }, maxima: { preset: "medium", crf: "17" } };
-const DIP = 0.35;      // fundido a negro entre planos
-const ENTRADA = 0.6;   // fundido de apertura
-const CIERRE = 0.9;    // fundido de cierre
+const DIP = 0.22;      // fundido a negro entre planos
+const ENTRADA = 0.45;  // fundido de apertura
+const CIERRE = 0.7;    // fundido de cierre
 
 function correr(bin, argumentos, cwd) {
   return new Promise((ok, mal) => execFile(bin, argumentos, { cwd, maxBuffer: 1 << 26 }, (e, so, se) => {

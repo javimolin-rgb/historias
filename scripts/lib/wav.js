@@ -76,6 +76,24 @@ function sumar(destino, fuente, ganancia = 1, desde = 0) {
     destino[desde + i] += fuente[i] * ganancia;
 }
 
+/* Entra y sale desde cero. Un efecto que arranca o corta de golpe suena a error digital,
+   no al sonido que pretende ser: ese clic es lo primero que se escucha. */
+function bordes(x, ms = 12, sr = SR) {
+  const n = Math.max(2, Math.round(ms * sr / 1000));
+  for (let i = 0; i < n && i < x.length; i++) {
+    const k = i / n;
+    x[i] *= k;
+    x[x.length - 1 - i] *= k;
+  }
+  return x;
+}
+
+/* Resonancia suave: deja pasar una banda y apaga el resto. Da cuerpo sin agregar filo. */
+function banda(x, centro, q = 2.2, sr = SR) {
+  const bajo = pasabajos(x, centro * (1 + 1 / (2 * q)), sr);
+  return pasaaltos(bajo, centro * (1 - 1 / (2 * q)) * 0.8, sr);
+}
+
 /* RMS de un canal, en dBFS. */
 function rms(x) {
   let s = 0;
@@ -103,4 +121,4 @@ function mezclar(capas, { rmsObjetivo = -17, picoMaximo = 0.89 } = {}) {
   return [L, R];
 }
 
-module.exports = { escribir, ruidoMarron, pasabajos, pasaaltos, envolvente, suavizar, sumar, rms, pico, mezclar, SR, tau };
+module.exports = { escribir, ruidoMarron, pasabajos, pasaaltos, banda, bordes, envolvente, suavizar, sumar, rms, pico, mezclar, SR, tau };

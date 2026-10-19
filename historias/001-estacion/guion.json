@@ -2,7 +2,7 @@
   "titulo": "30 días atrapado en una estación de servicio",
   "serie": "30 días atrapado en…",
   "voz": "es-BO-MarceloNeural",
-  "rate": "-4%",
+  "rate": "+16%",
   "musica": "ceniza",
   "volumenMusica": 0.085,
   "notas": "Historia original. Los datos de las tarjetas son reales y llevan su fuente.",
@@ -24,7 +24,6 @@
         "x": 760,
         "y": 985
       },
-      "respiro": 0.2,
       "id": "p01",
       "rotulo": {
         "arriba": "30 DÍAS ATRAPADO EN",
@@ -50,13 +49,12 @@
       "sfx": [
         "viento"
       ],
-      "respiro": 0.15,
       "id": "p02",
       "rotulo": {
         "arriba": "30 DÍAS ATRAPADO EN",
         "texto": "UNA ESTACIÓN DE SERVICIO"
       },
-      "volumenSfx": 0.3
+      "volumenSfx": 0.13
     },
     {
       "escena": "estacion-exterior",
@@ -74,7 +72,6 @@
         "x": 760,
         "y": 985
       },
-      "respiro": 0.2,
       "id": "p03"
     },
     {
@@ -113,7 +110,7 @@
       ],
       "subtitulo": "grito",
       "id": "p05",
-      "volumenSfx": 0.5
+      "volumenSfx": 0.17
     },
     {
       "escena": "puerta-tienda",
@@ -163,7 +160,7 @@
         "persiana"
       ],
       "id": "p07",
-      "volumenSfx": 0.4
+      "volumenSfx": 0.14
     },
     {
       "escena": "tienda",
@@ -248,7 +245,7 @@
         }
       ],
       "id": "p10",
-      "volumenSfx": 0.32
+      "volumenSfx": 0.11
     },
     {
       "escena": "tienda",
@@ -334,7 +331,7 @@
         "fuente": "USGS — «Ash Fall: A Hard Rain of Abrasive Particles» (FS 027-00)"
       },
       "id": "p14",
-      "respiro": 0.9
+      "respiro": 0.7
     },
     {
       "escena": "bodega",
@@ -384,9 +381,8 @@
       ],
       "transicion": "fundido",
       "efecto": "titila",
-      "respiro": 0.15,
       "id": "p16",
-      "volumenSfx": 0.4
+      "volumenSfx": 0.15
     },
     {
       "escena": "tienda",
@@ -452,7 +448,7 @@
       ],
       "transicion": "fundido",
       "id": "p18",
-      "volumenSfx": 0.45
+      "volumenSfx": 0.15
     },
     {
       "escena": "tienda",
@@ -471,7 +467,7 @@
         "fuente": "USGS Volcano Hazards Program / IVHHN"
       },
       "id": "p19",
-      "respiro": 0.9
+      "respiro": 0.7
     },
     {
       "escena": "tienda",
@@ -571,7 +567,7 @@
         "fuente": "USGS — «Ash Fall: A Hard Rain of Abrasive Particles» (FS 027-00)"
       },
       "id": "p23",
-      "respiro": 1.5
+      "respiro": 0.8
     },
     {
       "escena": "tienda",
@@ -613,7 +609,7 @@
         }
       ],
       "id": "p24",
-      "volumenSfx": 0.32
+      "volumenSfx": 0.11
     },
     {
       "escena": "tienda",
@@ -637,7 +633,6 @@
         "comida": "11 días",
         "bateria": "28%"
       },
-      "respiro": 0.1,
       "id": "p25"
     },
     {
@@ -667,7 +662,7 @@
       ],
       "subtitulo": "grito",
       "id": "p26",
-      "volumenSfx": 0.5
+      "volumenSfx": 0.17
     },
     {
       "escena": "bodega",
@@ -718,7 +713,7 @@
         "fuente": "Manual Esfera 2018 — Abastecimiento de agua"
       },
       "id": "p28",
-      "respiro": 0.9
+      "respiro": 0.7
     },
     {
       "escena": "bodega",
@@ -795,9 +790,8 @@
       "sfx": [
         "golpes"
       ],
-      "respiro": 0.15,
       "id": "p31",
-      "volumenSfx": 0.55
+      "volumenSfx": 0.2
     },
     {
       "escena": "puerta-tienda",
@@ -840,7 +834,6 @@
       "sfx": [
         "golpes"
       ],
-      "respiro": 0.15,
       "id": "p33",
       "hud": {
         "dia": 19,
@@ -849,7 +842,7 @@
         "comida": "7 días",
         "bateria": "15%"
       },
-      "volumenSfx": 0.55
+      "volumenSfx": 0.2
     },
     {
       "escena": "puerta-tienda",
@@ -902,7 +895,7 @@
       ],
       "transicion": "fundido",
       "id": "p35",
-      "volumenSfx": 0.5
+      "volumenSfx": 0.17
     },
     {
       "escena": "afuera-ceniza",
@@ -946,7 +939,6 @@
         "comida": "7 días",
         "bateria": "15%"
       },
-      "respiro": 0.15,
       "id": "p37"
     },
     {
@@ -973,7 +965,6 @@
         "bateria": "15%"
       },
       "subtitulo": "grito",
-      "respiro": 0.2,
       "id": "p38"
     },
     {
@@ -1001,7 +992,7 @@
       ],
       "transicion": "fundido",
       "id": "p39",
-      "volumenSfx": 0.5
+      "volumenSfx": 0.17
     },
     {
       "escena": "puerta-tienda",
@@ -1029,7 +1020,7 @@
       ],
       "transicion": "fundido",
       "id": "p40",
-      "volumenSfx": 0.55
+      "volumenSfx": 0.2
     },
     {
       "escena": "puerta-tienda",
@@ -1052,7 +1043,6 @@
         "comida": "3 días",
         "bateria": "4%"
       },
-      "respiro": 0.2,
       "id": "p41"
     },
     {
@@ -1099,8 +1089,8 @@
         "comida": "3 días",
         "bateria": "4%"
       },
-      "respiro": 0.5,
-      "id": "p43"
+      "id": "p43",
+      "respiro": 0.3
     },
     {
       "escena": "tienda",
@@ -1147,7 +1137,6 @@
         "persiana"
       ],
       "subtitulo": "grito",
-      "respiro": 0.4,
       "id": "p45",
       "hud": {
         "dia": 30,
@@ -1156,7 +1145,8 @@
         "comida": "1 día",
         "bateria": "0%"
       },
-      "volumenSfx": 0.4
+      "volumenSfx": 0.14,
+      "respiro": 0.22
     },
     {
       "escena": "afuera-ceniza",
@@ -1190,7 +1180,6 @@
         "mirar": "derecha",
         "escala": 0.8
       },
-      "respiro": 0.5,
       "id": "p47"
     },
     {
@@ -1204,8 +1193,9 @@
       },
       "transicion": "fundido",
       "subtitulo": "grito",
-      "respiro": 1.2,
-      "id": "p48"
+      "id": "p48",
+      "respiro": 1.0
     }
-  ]
+  ],
+  "respiro": 0.12
 }

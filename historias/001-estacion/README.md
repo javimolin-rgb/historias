@@ -2,9 +2,10 @@
 
 Historia original. Primer capítulo de la serie «30 días atrapado en…».
 
-- **Duración:** 2:57 (versión Instagram / YouTube corto)
-- **Voz:** `es-BO-MarceloNeural`, rate `-4%`
+- **Duración:** 2:23 (versión Instagram / YouTube corto)
+- **Voz:** `es-BO-MarceloNeural`, rate `+16%`
 - **Música:** `assets/audio/musica/ceniza.wav` al 8,5 % (sintetizada en el repo)
+- **Efectos:** entre 11 % y 20 %, por debajo de la voz
 - **Escenas:** `estacion-exterior`, `tienda`, `puerta-tienda`, `bodega`, `afuera-ceniza`
 
 ## Estructura

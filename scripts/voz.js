@@ -9,7 +9,7 @@ const { ffprobe, edgeTts } = require("./lib/bin");
 const { cargar, mkdir, args } = require("./lib/historia");
 const mp3 = require("./lib/mp3");
 
-const RESPIRO = 0.3; // segundos de aire al final de cada plano (CLAUDE.md)
+const RESPIRO = 0.12; // aire al final de cada plano; el guion puede cambiarlo con "respiro"
 
 const correr = (cmd, argumentos) => new Promise((ok, mal) =>
   execFile(cmd, argumentos, { maxBuffer: 1 << 24 }, (e, so, se) =>
@@ -77,7 +77,7 @@ async function main() {
     const d = await duracion(mp3Ruta);
     tiempos[p.id] = {
       audio: +d.toFixed(3),
-      duracion: +(Math.max(d, 0.8) + (p.respiro ?? RESPIRO)).toFixed(3),
+      duracion: +(Math.max(d, 0.8) + (p.respiro ?? guion.respiro ?? RESPIRO)).toFixed(3),
       palabras: leerPalabras(srtRuta),
     };
     process.stdout.write(`\r  ${p.id}  ${d.toFixed(2)}s  "${texto.slice(0, 38)}"      `);

@@ -71,7 +71,19 @@ Duraciones: corto vertical de 60–90 s, versión Instagram de 2–3 min, YouTub
 }
 ```
 
-La duración de cada plano sale de la duración de su audio, más un respiro de unos 0,3 s.
+La duración de cada plano sale de la duración de su audio más un respiro. El respiro por defecto
+es 0,12 s; se cambia para toda la historia con `"respiro"` en la raíz del guion, o plano a plano.
+Solo se alarga donde hace falta: las tarjetas necesitan ~0,7 s extra para que el dato se alcance
+a leer, y la pregunta final ~1 s.
+
+La velocidad de la voz va en `"rate"` (por ejemplo `"+16%"`). El canal narra rápido: con la
+velocidad por defecto el corte se arrastra. Los valores negativos hay que pasarlos pegados
+(`--rate=-4%`), cosa que ya hace `scripts/voz.js`.
+
+**Efectos de sonido:** son de apoyo, no de primer plano. Se mezclan entre 0,11 y 0,20
+(`"volumenSfx"` por plano). Por encima de eso tapan la voz y se leen como errores, no como sonido.
+Los que genera `npm run audio` entran y salen desde cero y están filtrados por debajo de 4 kHz
+justamente por eso: un transitorio duro o un agudo brillante suena a fallo técnico.
 
 ## Pipeline (comandos de Node)
 
